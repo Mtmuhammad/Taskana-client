@@ -1,0 +1,31 @@
+@use "../abstracts/_variables" as *;
+@use "../abstracts/_mixins" as *;
+
+html {
+  font-size: 10px;
+
+  @include respond(port) {
+    font-size: 9.5px;
+  }
+  @include respond(phone) {
+    font-size: 8.5px;
+  }
+  @include respond(sphone) {
+    font-size: 7.5px;
+  }
+  @include respond(xsphone) {
+    font-size: 6.5px;
+  }
+}
+
+body {
+  font-weight: 400;
+  line-height: 1.7;
+  font-family: 'Poppins', sans-serif;
+  color: $primary-background;
+}
+
+.text-dark {
+  color: $primary-background !important;
+}
+

@@ -1,0 +1,26 @@
+@mixin respond ($breakpoint) {
+   @if $breakpoint == tiny {
+       @media (max-width: 320px) {@content};
+   }
+   @if $breakpoint == xsphone {
+       @media (max-width: 360px) {@content};
+   }
+   @if $breakpoint == sphone {
+       @media (max-width: 450px) {@content};
+   }
+   @if $breakpoint == phone {
+       @media (max-width: 576px) {@content};
+   }
+   @if $breakpoint == sport {
+       @media (max-width: 768px) {@content};
+   }
+   @if $breakpoint == port {
+       @media (max-width: 992px) {@content};
+   }
+   @if $breakpoint == land {
+       @media (max-width: 1200px) {@content};
+   }
+   @if $breakpoint == desktop {
+       @media (max-width: 1400px) {@content};
+   }
+}
