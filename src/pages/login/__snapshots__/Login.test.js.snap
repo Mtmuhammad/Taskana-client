@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="navbar navbar-light navbar-expand-md px-0 mx-auto bg-transparent"
+    role="navigation"
+    style="width: 90%;"
+  >
+    <a
+      aria-current="page"
+      class="register-link mt-3 navbar-brand d-flex align-items-center"
+      href="/"
+    >
+      <img
+        alt="logo"
+        class="register-logo"
+        src="./taskana-main.svg"
+      />
+    </a>
+  </nav>
+  <div
+    class="container register d-flex align-items-center justify-content-center"
+  >
+    <div
+      class="border-0"
+      style="width: 100%; max-width: 375px;"
+    >
+      <div
+        class="card-body p-4 mx-auto"
+      >
+        <div
+          class="mt-5"
+        >
+          <p
+            class="h1 mb-5 text-center fw-bold"
+          >
+            Login to Account
+          </p>
+        </div>
+        <form
+          data-testid="register-form"
+          style="min-width: 250px;"
+        >
+          <div
+            class="form-input mb-3"
+          >
+            <label
+              class="text-muted m-0"
+              for="email"
+            >
+              E-mail
+            </label>
+            <div
+              class="md-form form-lg md-outline"
+            >
+              <input
+                autocomplete="off"
+                class="form-control form-control-lg bg rounded-0 mt-n3"
+                id="email"
+                name="email"
+                placeholder="E-mail address"
+                required=""
+                type="email"
+              />
+            </div>
+          </div>
+          <div
+            class="form-input mb-3"
+          >
+            <label
+              class="text-muted m-0"
+              for="password"
+            >
+              Password
+            </label>
+            <div
+              class="md-form form-lg md-outline"
+            >
+              <input
+                autocomplete="off"
+                class="form-control form-control-lg bg rounded-0 mt-n3"
+                id="password"
+                name="password"
+                placeholder="Password"
+                required=""
+                type="password"
+              />
+            </div>
+          </div>
+          <button
+            class="btn btn-block w-100 my-5"
+            disabled=""
+            type="submit"
+          >
+            Login
+          </button>
+        </form>
+        <p
+          class="text-muted text-center mb-3"
+          style="font-size: 1.5rem;"
+        >
+          Don't have an account? 
+          <a
+            class="nav-link d-inline p-0 text-dark"
+            href="/login"
+            style="font-weight: 700;"
+          >
+            Sign-up
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

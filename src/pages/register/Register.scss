@@ -59,4 +59,11 @@ span {
   &-logo {
     height: 4rem;
   }
+
+  &-link {
+    @include respond(phone) {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
 }
