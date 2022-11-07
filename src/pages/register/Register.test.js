@@ -2,21 +2,22 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import Register from "./Register";
 import userEvent from "@testing-library/user-event";
+import {BrowserRouter} from "react-router-dom"
 
 describe("smoke and snapshot tests", () => {
   test("should render without crashing", () => {
-    render(<Register />);
+    render(<Register /> , {wrapper: BrowserRouter});
   });
 
   test("should match snapshot", () => {
-    const { asFragment } = render(<Register />);
+    const { asFragment } = render(<Register /> , {wrapper: BrowserRouter});
     expect(asFragment()).toMatchSnapshot();
   });
 });
 
 describe("navbar brand", () => {
   test("should render logo", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const logo = screen.getByAltText("logo");
     expect(logo).toBeInTheDocument();
   });
@@ -24,13 +25,13 @@ describe("navbar brand", () => {
 
 describe("register form", () => {
   test("should render register form", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const form = screen.getByTestId("register-form");
     expect(form).toBeInTheDocument();
   });
 
   test("should render firstName input", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const label = screen.getByText("First Name");
     expect(label).toHaveClass("text-muted m-0");
     const input = screen.getByPlaceholderText("First Name");
@@ -40,7 +41,7 @@ describe("register form", () => {
     );
   });
   test("should render lastName input", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const label = screen.getByText("Last Name");
     expect(label).toHaveClass("text-muted m-0");
     const input = screen.getByPlaceholderText("Last Name");
@@ -50,7 +51,7 @@ describe("register form", () => {
     );
   });
   test("should render email input", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const label = screen.getByText("E-mail");
     expect(label).toHaveClass("text-muted m-0");
     const input = screen.getByPlaceholderText("E-mail address");
@@ -60,7 +61,7 @@ describe("register form", () => {
     );
   });
   test("should render password input", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const label = screen.getByText("Password");
     expect(label).toHaveClass("text-muted m-0");
     const input = screen.getByPlaceholderText("Password");
@@ -70,7 +71,7 @@ describe("register form", () => {
     );
   });
   test("should render confirm password input", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const label = screen.getByText("Confirm Password");
     expect(label).toHaveClass("text-muted m-0");
     const input = screen.getByPlaceholderText("Re-enter password");
@@ -80,7 +81,7 @@ describe("register form", () => {
     );
   });
   test("should render empRole select field", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const label = screen.getByText("Employee Role");
     expect(label).toHaveClass("text-muted m-0");
     const select = screen.getByRole("combobox");
@@ -96,7 +97,7 @@ describe("register form", () => {
 
 describe("submit btn", () => {
   test("should render", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const btn = screen.getByRole("button");
     expect(btn).toHaveClass("btn btn-block w-100 my-5");
     expect(btn).toHaveTextContent("Sign Up");
@@ -104,7 +105,7 @@ describe("submit btn", () => {
   });
 
   test("should enable btn when fields are valid", () => {
-    render(<Register />);
+    render(<Register />, {wrapper: BrowserRouter});
     const btn = screen.getByRole("button");
     expect(btn.disabled).toBe(true);
 

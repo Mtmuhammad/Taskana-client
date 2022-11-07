@@ -18,14 +18,39 @@ html {
   }
 }
 
+:root {
+  --body-color: #{$body-color};
+    --sidebar-color: #{$sidebar-color};
+    --primary-color: #{$primary-color};
+    --primary-color-light: #{$primary-color-light};
+    --toggle-color: #{$toggle-color};
+    --text-color: #{$text-color};
+    --heading-color: #{$heading-color};
+}
 body {
   font-weight: 400;
   line-height: 1.7;
-  font-family: 'Poppins', sans-serif;
   color: $primary-background;
+  transition: all 0.3 ease;
+  background-color: var(--body-color);
 }
 
-.text-dark {
-  color: $primary-background !important;
+body.dark{
+  --body-color: #{$body-color-dark};
+  --sidebar-color:#{$sidebar-color-dark};
+  --primary-color:#{$primary-color-dark};
+  --primary-color-light: #{$primary-color-light-dark};
+  --toggle-color: #{$toggle-color-dark};
+  --text-color: #{$text-color-dark};
+  --heading-color: #{$heading-color-dark};
+  --link-color: #{$link-color-dark};
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 

@@ -67,3 +67,14 @@ span {
     }
   }
 }
+
+
+.card-body {
+  .h1, .h6 {
+    color: var(--heading-color)!important;
+  }
+
+  .nav-link {
+    color: var(--link-color) !important;
+  }
+}

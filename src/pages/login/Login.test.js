@@ -2,21 +2,22 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import Login from "./Login";
 import userEvent from "@testing-library/user-event";
+import {BrowserRouter} from "react-router-dom"
 
 describe("smoke and snapshot tests", () => {
   test("should render without crashing", () => {
-    render(<Login />);
+    render(<Login />, {wrapper: BrowserRouter});
   });
 
   test("should match snapshot", () => {
-    const { asFragment } = render(<Login />);
+    const { asFragment } = render(<Login />, {wrapper: BrowserRouter});
     expect(asFragment()).toMatchSnapshot();
   });
 });
 
 describe("navbar brand", () => {
   test("should render logo", () => {
-    render(<Login />);
+    render(<Login />, {wrapper: BrowserRouter});
     const logo = screen.getByAltText("logo");
     expect(logo).toBeInTheDocument();
   });
@@ -24,13 +25,13 @@ describe("navbar brand", () => {
 
 describe("register form", () => {
   test("should render register form", () => {
-    render(<Login />);
+    render(<Login />, {wrapper: BrowserRouter});
     const form = screen.getByTestId("register-form");
     expect(form).toBeInTheDocument();
   });
 
   test("should render email input", () => {
-    render(<Login />);
+    render(<Login />, {wrapper: BrowserRouter});
     const label = screen.getByText("E-mail");
     expect(label).toHaveClass("text-muted m-0");
     const input = screen.getByPlaceholderText("E-mail address");
@@ -40,7 +41,7 @@ describe("register form", () => {
     );
   });
   test("should render password input", () => {
-    render(<Login />);
+    render(<Login />, {wrapper: BrowserRouter});
     const label = screen.getByText("Password");
     expect(label).toHaveClass("text-muted m-0");
     const input = screen.getByPlaceholderText("Password");
@@ -54,7 +55,7 @@ describe("register form", () => {
 
 describe("submit btn", () => {
   test("should render", () => {
-    render(<Login />);
+    render(<Login />, {wrapper: BrowserRouter});
     const btn = screen.getByRole("button");
     expect(btn).toHaveClass("btn btn-block w-100 my-5");
     expect(btn).toHaveTextContent("Login");
@@ -62,7 +63,7 @@ describe("submit btn", () => {
   });
 
   test("should enable btn when fields are valid", () => {
-    render(<Login />);
+    render(<Login />, {wrapper: BrowserRouter});
     const btn = screen.getByRole("button");
     expect(btn.disabled).toBe(true);
     userEvent.type(

@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef, useContext } from "react";
-import AuthContext from "../../context/AuthProvider";
+import { useState, useEffect, useRef } from "react";
+import useAuth from "../../hooks/useAuth";
 import "./Register.scss";
 import axios from "../../http-common";
+import { Link, useNavigate } from "react-router-dom";
 
 // first and last name REGEX
 const NAME_REGEX = /^(?=.*[A-Z])[a-zA-Z-" * "]{2,20}$/;
@@ -13,8 +14,9 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%&]).{8,20}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const REGISTER_URL = process.env.REACT_APP_REGISTER_URL;
 
-const Register = () => {
-  const { setAuth } = useContext(AuthContext);
+const Register = ({isDark}) => {
+  const { setAuth } = useAuth();
+  const navigate = useNavigate();
   const firstNameRef = useRef();
 
   const [values, setValues] = useState({
@@ -99,12 +101,16 @@ const Register = () => {
         withCredentials: true,
       });
 
+      setSuccess(true);
       const accessToken = res?.data?.accessToken;
       const user = res?.data?.user;
-      setAuth({ user, accessToken });
+      const role = res?.data?.role;
+
+      setAuth({ role, user, accessToken });
       clearInputs();
       setErrMsg("");
-      setSuccess(true);
+
+      navigate("/");
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response!");
@@ -126,14 +132,14 @@ const Register = () => {
           className="register-link mt-3 navbar-brand d-flex align-items-center"
           href="/"
         >
-          <img className="register-logo" alt="logo" src="./taskana-main.svg" />
+          <img className="register-logo" alt="logo" src={isDark === 'true' ? "./taskana-main-dark.svg" : "./taskana-main.svg" } />
         </a>
       </nav>
       <div className="container d-flex align-items-center justify-content-center">
         <div className="border-0" style={{ width: "100%", maxWidth: "375px" }}>
           <div className="card-body p-4 mx-auto">
             <div className="mt-5">
-              <p className="h1 mb-5 text-center fw-bold">Create Account</p>
+              <p className="h1 mb-4 text-center fw-bold">Create Account</p>
             </div>
             {/* error message */}
             {errMsg && (
@@ -392,16 +398,16 @@ const Register = () => {
 
             <p
               style={{ fontSize: "1.5rem" }}
-              className="text-muted text-center mb-3"
+              className="h6 text-center mb-3"
             >
               Have an account?{" "}
-              <a
-                className="nav-link d-inline p-0 text-dark"
-                href="/login"
+              <Link
+                className="nav-link d-inline p-0"
+                to="/login"
                 style={{ fontWeight: "700" }}
               >
                 Login
-              </a>
+              </Link>
             </p>
           </div>
         </div>

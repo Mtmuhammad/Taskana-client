@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <nav
+    class="sidebar"
+  >
+    <header>
+      <div
+        class="image-text"
+      >
+        <span
+          class="image"
+        >
+          <img
+            alt="Taskana alt"
+            src="taskana-alt.svg"
+          />
+        </span>
+        <div
+          class="text logo-text"
+        >
+          <span
+            class="name"
+          >
+            User
+          </span>
+          <span
+            class="role"
+          >
+            User Role
+          </span>
+        </div>
+      </div>
+      <i
+        class="bx bx-menu toggle"
+      />
+    </header>
+    <div
+      class="menu-bar"
+    >
+      <div
+        class="menu"
+      >
+        <li
+          class="search-box"
+        >
+          <i
+            class="bx bx-search icon"
+          />
+          <input
+            placeholder="Search..."
+            type="text"
+          />
+        </li>
+        <ul
+          class="p-0 menu-links"
+        >
+          <li
+            class="nav-link"
+          >
+            <a
+              aria-current="page"
+              class="sidebar-links active"
+              data-testid="sidebar-link"
+              href="/"
+            >
+              <i
+                class="bx bx-home-alt icon"
+              />
+              <span
+                class="text nav-text"
+              >
+                Dashboard
+              </span>
+            </a>
+          </li>
+          <li
+            class="nav-link"
+          >
+            <a
+              class="sidebar-links"
+              data-testid="sidebar-link"
+              href="/projects"
+            >
+              <i
+                class="bx bx-briefcase-alt icon"
+              />
+              <span
+                class="text nav-text"
+              >
+                Projects
+              </span>
+            </a>
+          </li>
+          <li
+            class="nav-link"
+          >
+            <a
+              class="sidebar-links"
+              data-testid="sidebar-link"
+              href="/tasks"
+            >
+              <i
+                class="bx bx-clipboard icon"
+              />
+              <span
+                class="text nav-text"
+              >
+                Tasks
+              </span>
+            </a>
+          </li>
+          <li
+            class="nav-link"
+          >
+            <a
+              class="sidebar-links"
+              data-testid="sidebar-link"
+              href="/tickets"
+            >
+              <i
+                class="bx bx-note icon"
+              />
+              <span
+                class="text nav-text"
+              >
+                Tickets
+              </span>
+            </a>
+          </li>
+          <li
+            class="nav-link"
+          >
+            <a
+              class="sidebar-links"
+              data-testid="sidebar-link"
+              href="/team"
+            >
+              <i
+                class="bx bx-group icon"
+              />
+              <span
+                class="text nav-text"
+              >
+                Team
+              </span>
+            </a>
+          </li>
+          <li
+            class="nav-link"
+          >
+            <a
+              class="sidebar-links"
+              data-testid="sidebar-link"
+              href="/account"
+            >
+              <i
+                class="bx bx-folder-open icon"
+              />
+              <span
+                class="text nav-text"
+              >
+                Account
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="bottom-content"
+      >
+        <li
+          class=""
+        >
+          <a
+            class="sidebar-links"
+            data-testid="sidebar-link"
+            href="/logout"
+          >
+            <i
+              class="bx bx-log-out icon"
+            />
+            <span
+              class="text nav-text"
+            >
+              Logout
+            </span>
+          </a>
+        </li>
+        <li
+          class="mode"
+        >
+          <div
+            class="sun-moon"
+          >
+            <i
+              class="bx bx-moon icon moon"
+            />
+            <i
+              class="bx bx-sun icon sun"
+            />
+          </div>
+          <span
+            class="mode-text text"
+          >
+            Dark Mode
+          </span>
+          <div
+            class="toggle-switch"
+          >
+            <span
+              class="switch"
+            />
+          </div>
+        </li>
+      </div>
+    </div>
+  </nav>
+  <section
+    class="home"
+  >
+    <div
+      class="text"
+    >
+       Page
+    </div>
+  </section>
+</DocumentFragment>
+`;

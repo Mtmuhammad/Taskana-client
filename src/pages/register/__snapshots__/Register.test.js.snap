@@ -33,7 +33,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
           class="mt-5"
         >
           <p
-            class="h1 mb-5 text-center fw-bold"
+            class="h1 mb-4 text-center fw-bold"
           >
             Create Account
           </p>
@@ -226,12 +226,12 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
           </button>
         </form>
         <p
-          class="text-muted text-center mb-3"
+          class="h6 text-center mb-3"
           style="font-size: 1.5rem;"
         >
           Have an account? 
           <a
-            class="nav-link d-inline p-0 text-dark"
+            class="nav-link d-inline p-0"
             href="/login"
             style="font-weight: 700;"
           >
