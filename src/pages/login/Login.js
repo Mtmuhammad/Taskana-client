@@ -13,8 +13,8 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%&]).{8,20}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 
-const Register = ({isDark}) => {
-  const { setAuth } = useAuth();
+const Login = ({isDark}) => {
+  const { setAuth, persist, setPersist} = useAuth();
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -76,7 +76,7 @@ const Register = ({isDark}) => {
         withCredentials: true,
       });
       setSuccess(true);
-      const accessToken = res?.data?.accessToken;
+      const accessToken = res?.data?.token;
       const user = res?.data?.user;
       const role = res?.data?.role;
       
@@ -93,6 +93,17 @@ const Register = ({isDark}) => {
       }
     }
   };
+
+  // set persist value
+  useEffect(() => {
+    localStorage.setItem("persist", persist)
+  },[persist])
+
+
+  //toggle persist login 
+  const togglePersist = () => {
+    setPersist(prev => !prev)
+  }
 
   return (
     <>
@@ -241,11 +252,15 @@ const Register = ({isDark}) => {
               >
                Login
               </button>
+              <div className="text-center persistCheck">
+                <input type="checkbox" id="persist" onChange={togglePersist} checked={persist} />
+                <label htmlFor="persist">Trust This Device</label>
+              </div>
             </form>
 
             <p
               style={{ fontSize: "1.5rem" }}
-              className="h6 text-center mb-3"
+              className="h6 text-center mt-5 mb-3"
             >
               Don't have an account?{" "}
               <Link
@@ -263,4 +278,4 @@ const Register = ({isDark}) => {
   );
 };
 
-export default Register;
+export default Login;

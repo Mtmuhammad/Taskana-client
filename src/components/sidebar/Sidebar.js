@@ -1,14 +1,24 @@
 import "./Sidebar.scss";
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
+import useAuth from "../../hooks/useAuth";
+import useLogout from "../../hooks/useLogout";
 
 const body = document.querySelector("body");
 
 const Sidebar = ({ page }) => {
+  const { auth } = useAuth();
   const [isOpen, setIsOpen] = useState(true);
   const [isDark, setIsDark] = useState(
     localStorage.getItem("isDark") === "true"
   );
+  const logout = useLogout()
+  const navigate = useNavigate()
+
+  const signOut = async () => {
+    await logout()
+    navigate('/')
+  }
 
   //save dark/light mode to local storage
   useEffect(() => {
@@ -31,8 +41,9 @@ const Sidebar = ({ page }) => {
             </span>
 
             <div className="text logo-text">
-              <span className="name">User</span>
-              <span className="role">User Role</span>
+              <span data-testid="first-name" className="name">{auth?.user?.firstName}</span>
+              <span data-testid="last-name" className="name"> {auth?.user?.lastName}</span>
+              <span data-testid="role" className="role">{auth?.user?.empRole}</span>
             </div>
           </div>
           <i
@@ -136,6 +147,7 @@ const Sidebar = ({ page }) => {
           <div className="bottom-content">
             <li className="">
               <NavLink
+              onClick={signOut}
               data-testid="sidebar-link"
                 to="/logout"
                 className={({ isActive }) =>
@@ -156,16 +168,13 @@ const Sidebar = ({ page }) => {
                 {isDark ? "Light Mode" : "Dark Mode"}
               </span>
 
-              <div onClick={toggleDark} className="toggle-switch">
+              <div data-testid="toggle-switch" onClick={toggleDark} className="toggle-switch">
                 <span className="switch"></span>
               </div>
             </li>
           </div>
         </div>
       </nav>
-      <section className="home">
-        <div className="text">{page} Page</div>
-      </section>
     </>
   );
 };

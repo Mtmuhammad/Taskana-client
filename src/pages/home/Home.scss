@@ -1,0 +1,26 @@
+@use "../../styles/abstracts/_variables" as *;
+@use "../../styles/abstracts/_mixins" as *;
+
+.page-breadcrumb {
+   max-width: 1300px;
+   margin: 0 auto;
+   padding: 2rem 1rem;
+   border-bottom: 0!important;
+   background: 0 0;
+   color: var(--text-color);
+}
+
+.table-style {
+   background-color: var(--primary-color-light);
+   color: var(--text-color);
+
+   & td {
+      color: var(--text-color);
+   }
+
+   & th {
+      font-size: 1.2rem;
+   }
+
+
+}

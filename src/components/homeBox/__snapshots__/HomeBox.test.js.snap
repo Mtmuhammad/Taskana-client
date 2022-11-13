@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="pe-3 mb-5 col-lg-3 col-md-6"
+  >
+    <div
+      class="card homebox"
+      data-testid="homebox"
+    >
+      <div
+        class="card-body"
+        data-testid="homebox-body"
+      >
+        <div
+          class="d-flex flex-row"
+        >
+          <div
+            class="
+ box-icon
+ d-flex
+ align-items-center
+ justify-content-center
+ rounded-circle
+ "
+            data-testid="icon-bg"
+            style="background-color: rgba(0, 208, 156, 0.565);"
+          >
+            <i
+              class="bx bx-briefcase-alt icon"
+              data-testid="homebox-icon"
+            />
+          </div>
+          <div
+            class="ms-4 align-self-center"
+          >
+            <h3
+              class="mb-2"
+              data-testid="homebox-count"
+            >
+              1
+            </h3>
+            <h5
+              class="mb-0"
+              data-testid="homebox-type"
+            >
+              Projects
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -5,7 +5,7 @@ const RequireAuth = () => {
   const { auth } = useAuth();
   const location = useLocation();
 
-  return (auth?.user && auth.role === 2022
+  return (auth?.user
    ? 
     <Outlet />
    : 

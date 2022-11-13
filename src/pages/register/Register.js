@@ -102,7 +102,7 @@ const Register = ({isDark}) => {
       });
 
       setSuccess(true);
-      const accessToken = res?.data?.accessToken;
+      const accessToken = res?.data?.token;
       const user = res?.data?.user;
       const role = res?.data?.role;
 

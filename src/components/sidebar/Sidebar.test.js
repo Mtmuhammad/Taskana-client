@@ -33,6 +33,24 @@ describe("header", () => {
       const img = screen.getByRole("img")
       expect(img).toBeInTheDocument()
    })
+   test("should render user first name", () => {
+      render(<Sidebar/>, {wrapper: BrowserRouter});
+      const firstName = screen.getByTestId("first-name")
+      expect(firstName).toBeInTheDocument()
+      expect(firstName).toHaveClass("name")
+   })
+   test("should render user last name", () => {
+      render(<Sidebar/>, {wrapper: BrowserRouter});
+      const lastName = screen.getByTestId("last-name")
+      expect(lastName).toBeInTheDocument()
+      expect(lastName).toHaveClass("name")
+   })
+   test("should render user role", () => {
+      render(<Sidebar/>, {wrapper: BrowserRouter});
+      const empRole = screen.getByTestId("role")
+      expect(empRole).toBeInTheDocument()
+      expect(empRole).toHaveClass("role")
+   })
 })
 
 describe("nav links", () => {
@@ -40,5 +58,12 @@ describe("nav links", () => {
       render(<Sidebar/>, {wrapper: BrowserRouter});
       const links = screen.getAllByTestId("sidebar-link")
       expect(links.length).toBe(7)
+   })
+
+   test("should render toggle switch", () => {
+      render(<Sidebar/>, {wrapper: BrowserRouter});
+      const toggle = screen.getByTestId("toggle-switch")
+      expect(toggle).toBeInTheDocument()
+      expect(toggle).toHaveClass("toggle-switch")
    })
 })

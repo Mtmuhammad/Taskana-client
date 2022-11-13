@@ -42,7 +42,7 @@ body.dark .switch::before {
   left: 2rem;
 }
 
-.home {
+.pages {
   position: absolute;
   top: 0;
   top: 0;
@@ -51,22 +51,16 @@ body.dark .switch::before {
   width: calc(100% - 23.7rem);
   background-color: var(--body-color);
   transition: all 0.3s ease;
-}
-.home .text {
-  font-size: 3rem;
-  font-weight: 500;
-  color: var(--text-color);
-  padding: 1.2rem 6rem;
+  padding: 4rem;
 }
 
-.sidebar.close ~ .home {
+
+.sidebar.close ~ .pages {
   left: 7.8rem;
   height: 100vh;
   width: calc(100% - 7.8rem);
 }
-body.dark .home .text {
-  color: var(--text-color);
-}
+
 
 .mode {
   border-radius: 0.6rem;
@@ -107,14 +101,14 @@ body.dark .home .text {
   }
 
   & .menu-bar {
-    height: calc(100% - 5.5rem);
+    height: calc(100% - 9.5rem);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
   & .menu {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
   }
 
   &.close {

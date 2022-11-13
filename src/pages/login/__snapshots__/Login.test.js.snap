@@ -95,9 +95,22 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
           >
             Login
           </button>
+          <div
+            class="text-center persistCheck"
+          >
+            <input
+              id="persist"
+              type="checkbox"
+            />
+            <label
+              for="persist"
+            >
+              Trust This Device
+            </label>
+          </div>
         </form>
         <p
-          class="h6 text-center mb-3"
+          class="h6 text-center mt-5 mb-3"
           style="font-size: 1.5rem;"
         >
           Don't have an account? 
