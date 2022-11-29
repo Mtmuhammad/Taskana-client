@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="modal fade"
+    data-testid="create-modal"
+    id="createProject"
+    tabindex="-1"
+  >
+    <div
+      class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable"
+    >
+      <div
+        class="modal-content"
+      >
+        <div
+          class="modal-header"
+        >
+          <h5
+            class="modal-title  fw-bold"
+            data-testid="header"
+            id="createProjectLabel"
+          >
+             Create Project
+          </h5>
+          <button
+            aria-label="Close"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            data-testid="close-btn"
+            type="button"
+          />
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="name"
+            >
+              Project Name
+            </label>
+            <input
+              class="form-control"
+              data-testid="input"
+              id="name"
+              name="name"
+              placeholder="What is the name of this project?"
+              type="text"
+            />
+          </div>
+          <div
+            class="deadline-form"
+          >
+            <form>
+              <div
+                class="row g-3 mb-3"
+              >
+                <div
+                  class="col"
+                >
+                  <label
+                    class="form-label"
+                    for="deadline"
+                  >
+                    Project End Date
+                  </label>
+                  <input
+                    class="form-control"
+                    data-testid="input"
+                    id="deadline"
+                    name="deadline"
+                    type="date"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="description"
+            >
+              Description (optional)
+            </label>
+            <textarea
+              class="form-control"
+              data-testid="input"
+              id="description"
+              name="description"
+              placeholder="Add any extra details about the project"
+              rows="3"
+            />
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <button
+            class="fs-5 btn btn-secondary"
+            data-bs-dismiss="modal"
+            data-testid="cancel-btn"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="fs-5 btn btn-success"
+            data-bs-dismiss="modal"
+            data-testid="create-btn"
+            type="button"
+          >
+            Create
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

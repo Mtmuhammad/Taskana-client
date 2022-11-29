@@ -5,6 +5,7 @@ import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 import Sidebar from "../../components/sidebar/Sidebar";
 import ProjectCard from "./projectCard/ProjectCard";
 import useAuth from "../../hooks/useAuth";
+import CreateModal from "./createProject/CreateModal";
 
 const Projects = () => {
   const { auth } = useAuth();
@@ -15,6 +16,12 @@ const Projects = () => {
   const [projects, setProjects] = useState();
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+  const [values, setValues] = useState({
+  name: "",
+  description: "",
+  deadline: "",
+  status: "",
+});
   
 
   // get all projects
@@ -41,6 +48,52 @@ const Projects = () => {
       controller.abort();
     };
   }, [axiosPrivate, location, navigate]);
+
+
+// set input values in state
+const onChange = (e) => {
+  setValues({ ...values, [e.target.name]: e.target.value });
+};
+
+// clear input on success
+const clearInputs = () => {
+  document.querySelectorAll("input").forEach((input) => {
+    input.value = "";
+  });
+  document.querySelector("textarea").value = "";
+};
+
+// handle form submission for project creation
+const handleCreate = async (e) => {
+  let isMounted = true;
+  const controller = new AbortController();
+  e.preventDefault();
+  let formData = { ...values };
+  delete formData.status;
+  try {
+    const res = await axiosPrivate.post(
+      "/projects",
+
+      JSON.stringify(formData),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+    const project = res.data.project;
+    setErrMsg("");
+    setSuccess("Project Created!");
+    isMounted && setProjects([...projects, project]);
+    clearInputs();
+  } catch (err) {
+    setErrMsg(err?.response?.data?.error?.message);
+  }
+
+  return () => {
+    isMounted = false;
+    controller.abort();
+  };
+};
 
   
 
@@ -119,7 +172,7 @@ const Projects = () => {
         </div>
 
         {/* create project modal */}
-        {/* <CreateModal onChange={onChange} handleCreate={handleCreate} /> */}
+        <CreateModal onChange={onChange} handleCreate={handleCreate} />
         {/* end create project modal */}
       </section>
     </>
