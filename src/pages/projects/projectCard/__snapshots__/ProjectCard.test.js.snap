@@ -125,6 +125,75 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
         </div>
       </div>
     </div>
+    <div
+      aria-hidden="true"
+      class="modal fade"
+      data-testid="delete-modal"
+      id="deleteProjectundefined"
+      style="display: none;"
+      tabindex="-1"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable"
+      >
+        <div
+          class="modal-content"
+        >
+          <div
+            class="modal-header"
+          >
+            <h5
+              class="modal-title  fw-bold"
+              data-testid="header"
+              id="deleteProjectLabel"
+            >
+               Delete item Permanently?
+            </h5>
+            <button
+              aria-label="Close"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              data-testid="close-btn"
+              type="button"
+            />
+          </div>
+          <div
+            class="modal-body justify-content-center flex-column d-flex"
+          >
+            <i
+              class="bx bxs-trash text-danger display-2 text-center mt-2"
+              data-testid="delete-icon"
+            />
+            <p
+              class="mt-4 fs-3 text-center"
+              data-testid="delete-text"
+            >
+              You can only delete this item Permanently
+            </p>
+          </div>
+          <div
+            class="modal-footer"
+          >
+            <button
+              class="fs-5 btn btn-secondary"
+              data-bs-dismiss="modal"
+              data-testid="cancel-btn"
+              type="button"
+            >
+              Cancel
+            </button>
+            <button
+              class="fs-5 btn btn-danger color-fff"
+              data-bs-dismiss="modal"
+              data-testid="delete-btn"
+              type="button"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </DocumentFragment>
 `;

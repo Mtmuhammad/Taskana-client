@@ -3,7 +3,7 @@ import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import "./ProjectCard.scss";
-// import DeleteModal from "../deleteProject/DeleteModal";
+import DeleteModal from "../deleteProject/DeleteModal";
 
 const ProjectCard = ({
   setProjects,
@@ -165,13 +165,13 @@ const ProjectCard = ({
         </div>
       </div>
 
-      {/* <DeleteModal
+      <DeleteModal
         setProjects={setProjects}
         projects={projects}
         setErrMsg={setErrMsg}
         setSuccess={setSuccess}
         project={project}
-      /> */}
+      />
     </div>
   );
 };
