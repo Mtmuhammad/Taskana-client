@@ -1,0 +1,63 @@
+@use "../../../styles/abstracts/_variables" as *;
+@use "../../../styles/abstracts/_mixins" as *;
+
+.project-card {
+   background-color: var(--primary-color-light);
+   color: var(--text-color);
+
+   & .card-body {
+      padding: 2rem;
+   }
+
+   & i {
+      font-size: 1.5rem;
+      margin-top: 0.4rem;
+
+      &.bxs-edit {
+         color: $primary-gold;
+      }
+      &.bx-trash {
+         color: $primary-red;
+      }
+   }
+
+   & span {
+      font-size: 1.3rem;
+   }
+
+   & h4 {
+      font-size: 1.6rem;
+   }
+
+   
+}
+
+.create-btn {
+   background-color: $primary-green;
+   color: var(--text-color);
+   font-size: 1.5rem;
+   padding: 0.75rem 1rem;
+
+   &:hover {
+      background-color: $primary-green;
+   }
+}
+
+.modal{
+   &-content {
+      font-size: 1.5rem;
+   }
+
+   & h5 {
+      font-size: 1.7rem;
+   }
+
+   & input, textarea {
+      font-size: 1.2rem;
+   }
+}
+
+.msg {
+   width: 50%;
+    margin: 0 auto 2rem;
+}

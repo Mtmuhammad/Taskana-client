@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="col-lg-4 col-md-6"
+  >
+    <div
+      class="mb-5 project-card card"
+      data-testid="project-card"
+    >
+      <div
+        class="card-body"
+      >
+        <div
+          class="d-flex align-items-center justify-content-between"
+        >
+          <div
+            class="project-name"
+          >
+            <h4
+              class="h3 mb-0 fw-bold mb-2"
+              data-testid="project-header"
+            />
+          </div>
+        </div>
+        <div
+          class="row g-2 pt-4"
+        >
+          <div
+            class="col-6"
+          >
+            <div
+              class="d-flex align-items-center"
+            >
+              <i
+                class="rounded-circle p-2 bx bx-paperclip"
+                data-testid="project-card-icon"
+                style="background: rgba(21, 207, 255, 0.565);"
+              />
+              <span
+                class="ms-2"
+                data-testid="project-date"
+              >
+                Created:  
+              </span>
+            </div>
+          </div>
+          <div
+            class="col-6"
+          >
+            <div
+              class="d-flex align-items-center"
+            >
+              <i
+                class="rounded-circle p-2 bx bxs-hourglass-top"
+                data-testid="project-card-icon"
+                style="background: rgba(0, 208, 156, 0.565);"
+              />
+              <span
+                class="ms-2"
+                data-testid="project-deadline"
+              >
+                Deadline:  
+              </span>
+            </div>
+          </div>
+          <div
+            class="col-6"
+          >
+            <div
+              class="d-flex align-items-center"
+            >
+              <i
+                class="rounded-circle p-2 bx bxs-report"
+                data-testid="project-card-icon"
+                style="background: rgba(255, 195, 109, 0.565);"
+              />
+              <span
+                class="ms-2"
+                data-testid="project-status"
+              >
+                Status: 
+              </span>
+            </div>
+          </div>
+          <div
+            class="col-6"
+          >
+            <div
+              class="d-flex align-items-center"
+            >
+              <i
+                class="rounded-circle p-2 bx bx-note"
+                data-testid="project-card-icon"
+                style="background: rgba(255, 80, 80, 0.565);"
+              />
+              <span
+                class="ms-2"
+                data-testid="project-tickets"
+              >
+                 tickets
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="dividers-block"
+        />
+        <div
+          class="d-flex align-items-center justify-content-center mt-3 mb-2"
+        >
+          <h5
+            class="fw-bold mb-0"
+          >
+            Progress
+          </h5>
+        </div>
+        <div
+          class="progress mt-3"
+          data-testid="project-progress"
+          style="height: 2rem;"
+        >
+          0
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

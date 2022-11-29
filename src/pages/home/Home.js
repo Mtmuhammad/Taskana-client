@@ -9,14 +9,13 @@ import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 import ProjectTable from "./projectTable/ProjectTable";
 import UserTable from "./userTable/UserTable";
 
-
 const Home = () => {
   const { auth } = useAuth();
   const [users, setUsers] = useState();
   const [projects, setProjects] = useState();
   const [tasks, setTasks] = useState();
-  const [tickets, setTickets] = useState()
-  const [assignedTickets, setAssignedTickets] = useState()
+  const [tickets, setTickets] = useState();
+  const [assignedTickets, setAssignedTickets] = useState();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,8 +45,7 @@ const Home = () => {
     };
   }, [axiosPrivate, location, navigate]);
 
-
-  // get all tasks from user 
+  // get all tasks from user
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
@@ -72,7 +70,6 @@ const Home = () => {
     };
   }, [axiosPrivate, location, navigate, auth?.user?.empNumber]);
 
-
   // get all users
   useEffect(() => {
     let isMounted = true;
@@ -80,7 +77,7 @@ const Home = () => {
 
     const getUsers = async () => {
       try {
-        const res = await axiosPrivate.get(`/users/`, {
+        const res = await axiosPrivate.get(`/users`, {
           signal: controller.signal,
         });
         isMounted && setUsers(res.data.users);
@@ -98,7 +95,6 @@ const Home = () => {
     };
   }, [axiosPrivate, location, navigate]);
 
-
   // get all Tickets
   useEffect(() => {
     let isMounted = true;
@@ -106,7 +102,7 @@ const Home = () => {
 
     const getTickets = async () => {
       try {
-        const res = await axiosPrivate.get(`/tickets/`, {
+        const res = await axiosPrivate.get(`/tickets`, {
           signal: controller.signal,
         });
         isMounted && setTickets(res.data.tickets);
@@ -131,9 +127,12 @@ const Home = () => {
 
     const getAssignedTickets = async () => {
       try {
-        const res = await axiosPrivate.get(`/tickets/assigned/${auth.user.empNumber}`, {
-          signal: controller.signal,
-        });
+        const res = await axiosPrivate.get(
+          `/tickets/assigned/${auth.user.empNumber}`,
+          {
+            signal: controller.signal,
+          }
+        );
         isMounted && setAssignedTickets(res.data.tickets);
       } catch (err) {
         console.log(err);
@@ -170,17 +169,18 @@ const Home = () => {
               type="Total Tasks"
               icon="bx bx-clipboard icon"
             />
-              <HomeBox
-                bgColor="#ffc36d90"
-                number={assignedTickets && assignedTickets.length}
-                type="Assigned Tickets"
-                icon="bx bx-box"
-              />
+            <HomeBox
+              bgColor="#ffc36d90"
+              number={assignedTickets && assignedTickets.length}
+              type="Assigned Tickets"
+              icon="bx bx-box"
+            />
             <HomeBox
               bgColor="#ff505090"
               number={tickets && tickets.length}
-              type="Total Tickets" 
-              icon="bx bx-note icon"/>
+              type="Total Tickets"
+              icon="bx bx-note icon"
+            />
           </div>
         </div>
         {/* end icon boxes */}
