@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import "./ProjectCard.scss";
 import DeleteModal from "../deleteProject/DeleteModal";
+import EditModal from "../editProject/EditModal";
 
 const ProjectCard = ({
   setProjects,
@@ -60,15 +61,15 @@ const ProjectCard = ({
     };
   }, [closedTickets?.length, project?.id, axiosPrivate, location, navigate]);
 
- 
-
   return (
     <div className="col-lg-4 col-md-6">
       <div data-testid="project-card" className="mb-5 project-card card">
         <div className="card-body">
           <div className="d-flex align-items-center justify-content-between">
             <div className="project-name">
-              <h4 data-testid="project-header" className="h3 mb-0 fw-bold mb-2">{project?.name}</h4>
+              <h4 data-testid="project-header" className="h3 mb-0 fw-bold mb-2">
+                {project?.name}
+              </h4>
             </div>
             {auth?.user?.isAdmin && (
               <div
@@ -80,7 +81,7 @@ const ProjectCard = ({
                   type="button"
                   className="btn btn-outline-secondary"
                   data-bs-toggle="modal"
-                  data-bs-target="#editproject"
+                  data-bs-target={`#editProject${project?.id}`}
                 >
                   <i className="bx bxs-edit"></i>
                 </button>
@@ -104,7 +105,9 @@ const ProjectCard = ({
                   className="rounded-circle p-2 bx bx-paperclip"
                   data-testid="project-card-icon"
                 ></i>
-                <span data-testid="project-date" className="ms-2">Created: {project?.date} </span>
+                <span data-testid="project-date" className="ms-2">
+                  Created: {project?.date}{" "}
+                </span>
               </div>
             </div>
             <div className="col-6">
@@ -114,7 +117,9 @@ const ProjectCard = ({
                   className="rounded-circle p-2 bx bxs-hourglass-top"
                   data-testid="project-card-icon"
                 ></i>
-                <span data-testid="project-deadline" className="ms-2">Deadline: {project?.deadline} </span>
+                <span data-testid="project-deadline" className="ms-2">
+                  Deadline: {project?.deadline}{" "}
+                </span>
               </div>
             </div>
             <div className="col-6">
@@ -124,7 +129,9 @@ const ProjectCard = ({
                   className="rounded-circle p-2 bx bxs-report"
                   data-testid="project-card-icon"
                 ></i>
-                <span data-testid="project-status" className="ms-2">Status: {project?.status}</span>
+                <span data-testid="project-status" className="ms-2">
+                  Status: {project?.status}
+                </span>
               </div>
             </div>
             <div className="col-6">
@@ -144,7 +151,11 @@ const ProjectCard = ({
           <div className="d-flex align-items-center justify-content-center mt-3 mb-2">
             <h5 className="fw-bold mb-0">Progress</h5>
           </div>
-          <div style={{ height: "2rem" }} data-testid="project-progress"className="progress mt-3">
+          <div
+            style={{ height: "2rem" }}
+            data-testid="project-progress"
+            className="progress mt-3"
+          >
             {progress && (
               <div
                 className="progress-bar bg-warning"
@@ -166,6 +177,13 @@ const ProjectCard = ({
       </div>
 
       <DeleteModal
+        setProjects={setProjects}
+        projects={projects}
+        setErrMsg={setErrMsg}
+        setSuccess={setSuccess}
+        project={project}
+      />
+      <EditModal
         setProjects={setProjects}
         projects={projects}
         setErrMsg={setErrMsg}
