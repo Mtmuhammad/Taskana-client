@@ -1,3 +1,5 @@
+// Modal to edit a new project
+
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import "../projectCard/ProjectCard.scss";
 import { useState, useEffect } from "react";

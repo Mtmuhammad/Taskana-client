@@ -1,3 +1,5 @@
+// Register page component
+
 import { useState, useEffect, useRef } from "react";
 import useAuth from "../../hooks/useAuth";
 import "./Register.scss";

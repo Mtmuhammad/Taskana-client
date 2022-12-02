@@ -97,7 +97,7 @@ body.dark .switch::before {
   z-index: 100;
 
   @include respond(sphone) {
-    width: 21rem;
+    width: 23rem;
   }
 
   & .menu-bar {
@@ -245,6 +245,10 @@ body.dark .switch::before {
       & img {
         width: 4rem;
         border-radius: 0.6rem;
+
+        @include respond(sphone) {
+          width: 3rem;
+        }
       }
     }
 

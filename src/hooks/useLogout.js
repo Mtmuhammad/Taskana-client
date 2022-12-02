@@ -1,3 +1,5 @@
+// Custom hook to logout user and remove auth state
+
 import axios from "../http-common";
 import useAuth from "./useAuth";
 

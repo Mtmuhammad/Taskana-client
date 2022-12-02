@@ -1,6 +1,8 @@
+// Component that displays project information on project page
+
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import "./ProjectCard.scss";
 import DeleteModal from "../deleteProject/DeleteModal";
@@ -19,6 +21,7 @@ const ProjectCard = ({
   const location = useLocation();
 
   const [tickets, setTickets] = useState();
+  const [info, setInfo] = useState();
   const [closedTickets, setClosedTickets] = useState();
   const [progress, setProgress] = useState(0);
 
@@ -32,7 +35,11 @@ const ProjectCard = ({
         const res = await axiosPrivate.get(`/tickets`, {
           signal: controller.signal,
         });
+        const result = await axiosPrivate.get(`/projects/${project.id}`, {
+          signal: controller.signal,
+        });
 
+        setInfo(result.data.project);
         const tickets = res.data.tickets.filter(
           (ticket) => ticket.projectId === project.id
         );
@@ -148,6 +155,7 @@ const ProjectCard = ({
             </div>
           </div>
           <div className="dividers-block"></div>
+          <div data-testid="project-description" className="mt-4 h5">{info?.description}</div>
           <div className="d-flex align-items-center justify-content-center mt-3 mb-2">
             <h5 className="fw-bold mb-0">Progress</h5>
           </div>
@@ -156,7 +164,7 @@ const ProjectCard = ({
             data-testid="project-progress"
             className="progress mt-3"
           >
-            {progress && (
+            {progress >= 0 && (
               <div
                 className="progress-bar bg-warning"
                 role="progressbar"

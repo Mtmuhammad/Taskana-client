@@ -56,6 +56,12 @@ describe("project card", () => {
     expect(tickets).toBeInTheDocument();
     expect(tickets).toHaveClass("ms-2");
   });
+  test("should render project description", () => {
+    render(<ProjectCard />, { wrapper: BrowserRouter });
+    const description = screen.getByTestId("project-description");
+    expect(description).toBeInTheDocument();
+    expect(description).toHaveClass("mt-4 h5");
+  });
   test("should render project progress", () => {
     render(<ProjectCard />, { wrapper: BrowserRouter });
     const progress = screen.getByTestId("project-progress");

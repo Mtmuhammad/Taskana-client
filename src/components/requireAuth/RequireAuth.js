@@ -1,3 +1,5 @@
+// Component that checks for auth state to gain access to protected routes
+
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 

@@ -17,12 +17,11 @@ const Projects = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
   const [values, setValues] = useState({
-  name: "",
-  description: "",
-  deadline: "",
-  status: "",
-});
-  
+    name: "",
+    description: "",
+    deadline: "",
+    status: "",
+  });
 
   // get all projects
   useEffect(() => {
@@ -49,53 +48,55 @@ const Projects = () => {
     };
   }, [axiosPrivate, location, navigate]);
 
-
-// set input values in state
-const onChange = (e) => {
-  setValues({ ...values, [e.target.name]: e.target.value });
-};
-
-// clear input on success
-const clearInputs = () => {
-  document.querySelectorAll("input").forEach((input) => {
-    input.value = "";
-  });
-  document.querySelector("textarea").value = "";
-};
-
-// handle form submission for project creation
-const handleCreate = async (e) => {
-  let isMounted = true;
-  const controller = new AbortController();
-  e.preventDefault();
-  let formData = { ...values };
-  delete formData.status;
-  try {
-    const res = await axiosPrivate.post(
-      "/projects",
-
-      JSON.stringify(formData),
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      }
-    );
-    const project = res.data.project;
-    setErrMsg("");
-    setSuccess("Project Created!");
-    isMounted && setProjects([...projects, project]);
-    clearInputs();
-  } catch (err) {
-    setErrMsg(err?.response?.data?.error?.message);
-  }
-
-  return () => {
-    isMounted = false;
-    controller.abort();
+  // set input values in state
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
-};
 
-  
+  // clear input on success
+  const clearInputs = () => {
+    document.querySelectorAll("input").forEach((input) => {
+      input.value = "";
+    });
+    document.querySelector("#createDescription").value = "";
+  };
+
+  // handle form submission for project creation
+  const handleCreate = async (e) => {
+    let isMounted = true;
+    const controller = new AbortController();
+    e.preventDefault();
+    let formData = { ...values };
+    delete formData.status;
+    try {
+      await axiosPrivate.post(
+        "/projects",
+
+        JSON.stringify(formData),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+
+      const res = await axiosPrivate.get("/projects", {
+        signal: controller.signal,
+      });
+      clearInputs();
+      setErrMsg("");
+      setSuccess("Project Created!");
+
+      setValues();
+      isMounted && setProjects(res.data.projects);
+    } catch (err) {
+      setErrMsg(err?.response?.data?.error?.message);
+    }
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  };
 
   return (
     <>

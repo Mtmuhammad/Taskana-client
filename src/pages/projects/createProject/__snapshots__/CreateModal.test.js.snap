@@ -86,14 +86,14 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
           >
             <label
               class="form-label"
-              for="description"
+              for="createDescription"
             >
               Description (optional)
             </label>
             <textarea
               class="form-control"
               data-testid="input"
-              id="description"
+              id="createDescription"
               name="description"
               placeholder="Add any extra details about the project"
               rows="3"

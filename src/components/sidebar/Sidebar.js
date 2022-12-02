@@ -1,3 +1,5 @@
+// Sidebar navigation 
+
 import "./Sidebar.scss";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";

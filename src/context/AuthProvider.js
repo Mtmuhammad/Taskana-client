@@ -1,3 +1,5 @@
+// Component to pass down info without props
+
 import { createContext, useState } from "react";
 
 const AuthContext = createContext({});

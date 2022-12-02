@@ -1,4 +1,4 @@
-import React from "react";
+// Modal to create a new project
 
 const CreateModal = ({ onChange, handleCreate }) => {
   return (
@@ -60,12 +60,12 @@ const CreateModal = ({ onChange, handleCreate }) => {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="description" className="form-label">
+              <label htmlFor="createDescription" className="form-label">
                 Description (optional)
               </label>
               <textarea
                 className="form-control"
-                id="description"
+                id="createDescription"
                 rows="3"
                 placeholder="Add any extra details about the project"
                 name="description"

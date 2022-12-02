@@ -1,4 +1,4 @@
-import React from "react";
+// Breadcrumb component to indicate the current page's location
 
 const Breadcrumb = ({ page }) => {
   return (

@@ -108,6 +108,10 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
           class="dividers-block"
         />
         <div
+          class="mt-4 h5"
+          data-testid="project-description"
+        />
+        <div
           class="d-flex align-items-center justify-content-center mt-3 mb-2"
         >
           <h5
@@ -121,7 +125,16 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
           data-testid="project-progress"
           style="height: 2rem;"
         >
-          0
+          <div
+            aria-valuemax="100"
+            aria-valuemin="0"
+            aria-valuenow="0"
+            class="progress-bar bg-warning"
+            role="progressbar"
+            style="padding: 1rem 0px; font-size: 1.2rem; width: 0%;"
+          >
+            0%
+          </div>
         </div>
       </div>
     </div>

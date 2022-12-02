@@ -1,4 +1,5 @@
-import React from "react";
+// Table to display projects form db
+
 
 const ProjectTable = ({ projects }) => {
   return (

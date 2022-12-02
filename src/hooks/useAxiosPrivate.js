@@ -1,3 +1,5 @@
+// Custom hook to set access tokens to axios calls on interceptors
+
 import { axiosPrivate } from "../http-common";
 import { useEffect } from "react";
 import useRefreshToken from "./useRefreshToken";

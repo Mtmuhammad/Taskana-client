@@ -1,3 +1,5 @@
+// Modal to delete a new project
+
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import "../projectCard/ProjectCard.scss";
 
