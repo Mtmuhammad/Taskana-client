@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="mb-5 d-flex justify-content-end"
+    data-testid="btn-container"
+  >
+    <button
+      class="btn create-btn"
+      data-bs-target="#createProject"
+      data-bs-toggle="modal"
+      type="button"
+    >
+      <i
+        class="me-2 bx bxs-plus-circle"
+        data-testid="btn-icon"
+      />
+      Create Project
+    </button>
+  </div>
+</DocumentFragment>
+`;

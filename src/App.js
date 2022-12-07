@@ -2,6 +2,7 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import Projects from "./pages/projects/Projects";
+import Tasks from "./pages/tasks/Tasks";
 import "./styles/base/_base.scss";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
@@ -26,6 +27,7 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="/" element={<Home />} />
             <Route path="projects" element={<Projects />}/>
+            <Route path="tasks" element={<Tasks />}/>
           </Route>
         </Route>
 

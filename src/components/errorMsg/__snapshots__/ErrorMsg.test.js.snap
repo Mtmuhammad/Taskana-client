@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="msg d-flex justify-content-between alert alert-danger alert-dismissible fade show"
+    data-testid="error-container"
+    role="alert"
+  >
+    <p
+      data-testid="error-msg"
+      style="font-size: 1.3rem; margin-bottom: 0px;"
+    >
+      <strong>
+        Error!
+      </strong>
+       
+    </p>
+    <i
+      aria-label="Close"
+      class="close text-danger bx bx-x"
+      data-dismiss="alert"
+      data-testid="error-msg-icon"
+      style="font-size: 2.3rem;"
+      type="button"
+    />
+  </div>
+</DocumentFragment>
+`;

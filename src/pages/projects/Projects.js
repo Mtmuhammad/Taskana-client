@@ -6,6 +6,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import ProjectCard from "./projectCard/ProjectCard";
 import useAuth from "../../hooks/useAuth";
 import CreateModal from "./createProject/CreateModal";
+import SuccessMsg from "../../components/successMsg/SuccessMsg";
+import ErrMsg from "../../components/errorMsg/ErrorMsg";
+import CreateBtn from "../../components/createBtn/CreateBtn";
 
 const Projects = () => {
   const { auth } = useAuth();
@@ -104,58 +107,13 @@ const Projects = () => {
       <section className="pages">
         <Breadcrumb page="Projects" />
         <div className="container">
-          {auth.user.isAdmin && (
-            <div className="mb-5 d-flex justify-content-end">
-              <button
-                type="button"
-                className="btn create-btn"
-                data-bs-toggle="modal"
-                data-bs-target="#createProject"
-              >
-                <i className="me-2 bx bxs-plus-circle"></i>Create Project
-              </button>
-            </div>
-          )}
+          {auth.user.isAdmin && <CreateBtn name={"Project"} />}
           {/* error message */}
-          {errMsg && (
-            <div
-              className="msg d-flex justify-content-between alert alert-danger alert-dismissible fade show"
-              role="alert"
-            >
-              <p style={{ fontSize: "1.3rem", marginBottom: "0" }}>
-                <strong>Error!</strong> {errMsg}
-              </p>
-              <i
-                type="button"
-                className="close text-danger bx bx-x"
-                data-dismiss="alert"
-                aria-label="Close"
-                style={{ fontSize: "2.3rem" }}
-                onClick={() => setErrMsg("")}
-              ></i>
-            </div>
-          )}
+          {errMsg && <ErrMsg errorMsg={errMsg} setErrMsg={setErrMsg} />}
 
           {/* success message */}
-          {success && (
-            <div
-              className="msg d-flex justify-content-between alert alert-success alert-dismissible fade show"
-              role="alert"
-            >
-              <p style={{ fontSize: "1.3rem", marginBottom: "0" }}>
-                <strong>{success}</strong>
-              </p>
-              <i
-                type="button"
-                className="close text-success bx bx-x"
-                data-dismiss="alert"
-                aria-label="Close"
-                style={{ fontSize: "2.3rem" }}
-                onClick={() => setSuccess("")}
-              ></i>
-            </div>
-          )}
-
+          {success && <SuccessMsg success={success} setSuccess={setSuccess} />}
+          {/* all projects */}
           <div className="row">
             {projects
               ? projects.map((project) => (

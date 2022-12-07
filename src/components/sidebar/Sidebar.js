@@ -121,19 +121,6 @@ const Sidebar = ({ page }) => {
               <li className="nav-link">
                 <NavLink
                 data-testid="sidebar-link"
-                  to="/team"
-                  className={({ isActive }) =>
-                    isActive ? "sidebar-links active" : "sidebar-links"
-                  }
-                >
-                  <i className="bx bx-group icon"></i>
-                  <span className="text nav-text">Team</span>
-                </NavLink>
-              </li>
-
-              <li className="nav-link">
-                <NavLink
-                data-testid="sidebar-link"
                   to="/account"
                   className={({ isActive }) =>
                     isActive ? "sidebar-links active" : "sidebar-links"

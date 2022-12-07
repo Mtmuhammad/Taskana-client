@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="col-12 col-lg-4"
+  >
+    <div
+      class="task-filter"
+      data-testid="filter-btn"
+    >
+      <div
+        class="task-filter-icon"
+        data-testid="filter-icon"
+      >
+        <i />
+      </div>
+      <div
+        class="d-flex align-items-center justify-content-between w-100"
+      >
+        <h3
+          class="task-filter-title"
+          data-testid="filter-title"
+        />
+        <span
+          class="task-filter-count badge badge-pill px-3 undefined"
+          data-testid="filter-number"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

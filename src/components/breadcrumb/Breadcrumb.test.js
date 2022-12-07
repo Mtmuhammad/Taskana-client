@@ -1,7 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Breadcrumb from "./Breadcrumb";
-import { BrowserRouter } from "react-router-dom";
 
 describe("smoke and snapshot tests", () => {
   test("should render without crashing", () => {

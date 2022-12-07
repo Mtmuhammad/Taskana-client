@@ -57,7 +57,7 @@ describe("nav links", () => {
    test("should render nav links", () => {
       render(<Sidebar/>, {wrapper: BrowserRouter});
       const links = screen.getAllByTestId("sidebar-link")
-      expect(links.length).toBe(7)
+      expect(links.length).toBe(6)
    })
 
    test("should render toggle switch", () => {

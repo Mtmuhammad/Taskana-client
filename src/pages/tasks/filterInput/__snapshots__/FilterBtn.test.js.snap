@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="p-3 border-bottom"
+  >
+    <div
+      class="input-group searchbar"
+      data-testid="input-container"
+    >
+      <span
+        class="input-group-text text-muted"
+        data-testid="input-icon"
+        id="search"
+      >
+        <i
+          class="bx bx-search-alt-2"
+        />
+      </span>
+      <input
+        class="form-control"
+        data-testid="input-search"
+        id="task-search"
+        placeholder="Search Tasks Here"
+        type="text"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
