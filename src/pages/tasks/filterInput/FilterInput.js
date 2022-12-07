@@ -3,7 +3,7 @@
 const FilterInput = ({ handleChange }) => {
   return (
     <div className="p-3 border-bottom">
-      <div data-testid="input-container" class="input-group searchbar">
+      <div data-testid="input-container" className="input-group searchbar">
         <span
           data-testid="input-icon"
           className="input-group-text text-muted"

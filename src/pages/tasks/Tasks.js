@@ -9,7 +9,8 @@ import FilterBtn from "../tasks/filterBtn/FilterBtn";
 import FilterInput from "../tasks/filterInput/FilterInput";
 import SuccessMsg from "../../components/successMsg/SuccessMsg";
 import ErrMsg from "../../components/errorMsg/ErrorMsg";
-import CreateBtn from "../../components/createBtn/CreateBtn"
+import CreateBtn from "../../components/createBtn/CreateBtn";
+import CreateModal from "../tasks/createTask/CreateModal";
 import "./taskItem/TaskItem.scss";
 
 const Tasks = () => {
@@ -21,13 +22,19 @@ const Tasks = () => {
   const [userTasks, setUserTasks] = useState();
   const [important, setImportant] = useState();
   const [complete, setComplete] = useState();
-  const [filter, setFilter] = useState();
+  const [filter, setFilter] = useState([]);
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState(false);
   const [showAll, setShowAll] = useState(true);
   const [showImportant, setShowImportant] = useState(false);
   const [showComplete, setShowComplete] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [values, setValues] = useState({
+    title: "",
+    description: "",
+    important: "",
+    createdBy: auth?.user?.empNumber,
+  });
 
   // get all tasks
   useEffect(() => {
@@ -40,12 +47,7 @@ const Tasks = () => {
           signal: controller.signal,
         });
         isMounted && setUserTasks(res.data.tasks);
-        setImportant(
-          res.data.tasks.filter((task) => task.important === true) || 0
-        );
-        setComplete(
-          res.data.tasks.filter((task) => task.status === "Completed") || 0
-        );
+        filterTasks(res);
       } catch (err) {
         console.log(err);
         navigate("/login", { state: { from: location }, replace: true });
@@ -60,9 +62,34 @@ const Tasks = () => {
     };
   }, [auth?.user?.empNumber, axiosPrivate, location, navigate]);
 
-  // clear search input
-  const clearSearch = () => {
+  // set important and complete state after fetching Tasks
+  const filterTasks = (res) => {
+    setImportant(res.data.tasks.filter((task) => task.important === true) || 0);
+    setComplete(
+      res.data.tasks.filter((task) => task.status === "Completed") || 0
+    );
+  };
+
+  // set input values in state
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  // clear input on success, clear search filter input
+  const clearInputs = () => {
+    document.querySelectorAll("input").forEach((input) => {
+      input.value = "";
+    });
+    document.querySelector("#createTaskDescription").value = "";
+    document.querySelector("#createTaskImportant").value = "";
     document.querySelector("#task-search").value = "";
+  };
+
+  //toggle active class on filter buttons
+  const toggleActive = (filter1, filter2, filter3) => {
+    document.querySelector(`#${filter1}`).classList.add("task-active");
+    document.querySelector(`#${filter2}`).classList.remove("task-active");
+    document.querySelector(`#${filter3}`).classList.remove("task-active");
   };
 
   // show all tasks
@@ -71,10 +98,8 @@ const Tasks = () => {
     setShowImportant(false);
     setShowFilter(false);
     setShowAll(true);
-    document.querySelector("#all").classList.add("task-active");
-    document.querySelector("#important").classList.remove("task-active");
-    document.querySelector("#complete").classList.remove("task-active");
-    clearSearch();
+    toggleActive("all", "important", "complete");
+    clearInputs();
   };
 
   // show important tasks
@@ -83,10 +108,8 @@ const Tasks = () => {
     setShowComplete(false);
     setShowFilter(false);
     setShowImportant(true);
-    document.querySelector("#important").classList.add("task-active");
-    document.querySelector("#all").classList.remove("task-active");
-    document.querySelector("#complete").classList.remove("task-active");
-    clearSearch();
+    toggleActive("important", "all", "complete");
+    clearInputs();
   };
 
   // show complete tasks
@@ -95,10 +118,8 @@ const Tasks = () => {
     setShowImportant(false);
     setShowFilter(false);
     setShowComplete(true);
-    document.querySelector("#all").classList.remove("task-active");
-    document.querySelector("#important").classList.remove("task-active");
-    document.querySelector("#complete").classList.add("task-active");
-    clearSearch();
+    toggleActive("complete", "all", "important");
+    clearInputs();
   };
 
   // filter task results by title and description from text input
@@ -132,6 +153,44 @@ const Tasks = () => {
     setShowFilter(true);
   };
 
+  // handle form submission for task creation
+  const handleCreate = async (e) => {
+    let isMounted = true;
+    const controller = new AbortController();
+    e.preventDefault();
+    let formData = { ...values };
+    formData.important = formData.important === "true";
+    try {
+      await axiosPrivate.post(
+        `/tasks`,
+
+        JSON.stringify(formData),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+
+      const res = await axiosPrivate.get(`/tasks/${auth?.user?.empNumber}`, {
+        signal: controller.signal,
+      });
+
+      isMounted && setUserTasks(res.data.tasks);
+      setErrMsg("");
+      setSuccess("Task Created!");
+      clearInputs();
+      setValues();
+      filterTasks(res);
+    } catch (err) {
+      setErrMsg(err?.response?.data?.error?.message);
+    }
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  };
+
   return (
     <>
       <Sidebar />
@@ -139,17 +198,17 @@ const Tasks = () => {
         <Breadcrumb page="Tasks" />
 
         {/* create task btn */}
-        <CreateBtn name={"Task"}/>
+        <CreateBtn name={"Task"} />
 
         {/* error message */}
-        {errMsg && <ErrMsg errorMsg={errMsg} setErrMsg={setErrMsg} />}
+        {errMsg ? <ErrMsg errorMsg={errMsg} setErrMsg={setErrMsg} /> : null}
 
         {/* success message */}
         {success && <SuccessMsg success={success} setSuccess={setSuccess} />}
 
         {/* filer btn group */}
-        <div class="tasks card mx-auto overflow-auto">
-          <div class="row">
+        <div className="tasks card mx-auto overflow-auto">
+          <div className="row">
             <FilterBtn
               onClick={handleAll}
               title="all"
@@ -177,7 +236,7 @@ const Tasks = () => {
 
             {/* task container */}
             <div>
-              <div id="all-todo-container" class="p-3">
+              <div id="all-todo-container" className="p-3">
                 {/* all tasks */}
                 {showAll &&
                   userTasks &&
@@ -235,6 +294,9 @@ const Tasks = () => {
             {/* end task container */}
           </div>
         </div>
+        {/* create task modal */}
+        <CreateModal onChange={onChange} handleCreate={handleCreate} />
+        {/* end create task modal */}
       </section>
     </>
   );

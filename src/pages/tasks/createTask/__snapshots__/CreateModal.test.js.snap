@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="modal fade"
+    data-testid="create-modal"
+    id="createTask"
+    tabindex="-1"
+  >
+    <div
+      class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable"
+    >
+      <div
+        class="modal-content"
+      >
+        <div
+          class="modal-header"
+        >
+          <h5
+            class="modal-title  fw-bold"
+            data-testid="header"
+            id="createProjectLabel"
+          >
+             Create Task
+          </h5>
+          <button
+            aria-label="Close"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            data-testid="close-btn"
+            type="button"
+          />
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="name"
+            >
+              Task Title
+            </label>
+            <input
+              class="form-control"
+              data-testid="input"
+              id="title"
+              name="title"
+              placeholder="What is the title of this task?"
+              type="text"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="createTaskDescription"
+            >
+              Description (optional)
+            </label>
+            <textarea
+              class="form-control"
+              data-testid="input"
+              id="createTaskDescription"
+              name="description"
+              placeholder="Add any extra details about this task"
+              rows="3"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="createTaskImportant"
+            >
+              Is this task urgent?
+            </label>
+            <select
+              class="form-control"
+              data-testid="input"
+              id="createTaskImportant"
+              name="important"
+              style="font-size: 1.3rem;"
+            >
+              <option
+                default=""
+                value=""
+              >
+                Choose an option:
+              </option>
+              <option
+                value="true"
+              >
+                Yes
+              </option>
+              <option
+                value="false"
+              >
+                No
+              </option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <button
+            class="fs-5 btn btn-secondary"
+            data-bs-dismiss="modal"
+            data-testid="cancel-btn"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="fs-5 btn btn-success"
+            data-bs-dismiss="modal"
+            data-testid="create-btn"
+            type="button"
+          >
+            Create
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
