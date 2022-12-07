@@ -1,13 +1,69 @@
-// Modal to create a new task
+// Modal to edit a new task
 
-const CreateModal = ({ onChange, handleCreate }) => {
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { useState } from "react";
+import "../taskItem/TaskItem.scss";
+import useAuth from "../../../hooks/useAuth";
+
+const EditModal = ({
+  task,
+  setShowTasks,
+  setUserTasks,
+  setSuccess,
+  setErrMsg,
+}) => {
+  const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+  const [values, setValues] = useState({});
+
+  // set input values in state
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  // handle form submission to edit task
+  const handleEdit = async (e) => {
+    let isMounted = true;
+    const controller = new AbortController();
+    e.preventDefault();
+    let formData = { ...values };
+    formData.important = formData.important === "true";
+    try {
+      await axiosPrivate.patch(
+        `/tasks/${task?.id}`,
+
+        JSON.stringify(formData),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      const res = await axiosPrivate.get(`/tasks/${auth?.user?.empNumber}`, {
+        signal: controller.signal,
+      });
+
+      setErrMsg("");
+      setSuccess("Task Modified!");
+      isMounted && setUserTasks(res.data.tasks);
+      setShowTasks(res.data.tasks);
+    } catch (err) {
+      setErrMsg(err?.response?.data?.error?.message);
+    }
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  };
+
   return (
     <div
+      style={{ color: "black" }}
       className="modal fade"
-      id="createTask"
+      id={`editTask${task?.id}`}
       tabIndex="-1"
       aria-hidden="true"
-      data-testid="create-modal"
+      data-testid="edit-modal"
     >
       <div className="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
         <div className="modal-content">
@@ -15,10 +71,10 @@ const CreateModal = ({ onChange, handleCreate }) => {
             <h5
               data-testid="header"
               className="modal-title  fw-bold"
-              id="createTaskLabel"
+              id="editTaskLabel"
             >
               {" "}
-              Create Task
+              Edit Task
             </h5>
             <button
               type="button"
@@ -41,6 +97,7 @@ const CreateModal = ({ onChange, handleCreate }) => {
                 placeholder="What is the title of this task?"
                 onChange={onChange}
                 data-testid="input"
+                defaultValue={task?.title}
               />
             </div>
 
@@ -56,6 +113,7 @@ const CreateModal = ({ onChange, handleCreate }) => {
                 name="description"
                 onChange={onChange}
                 data-testid="input"
+                defaultValue={task?.description}
               ></textarea>
             </div>
 
@@ -68,6 +126,7 @@ const CreateModal = ({ onChange, handleCreate }) => {
                 style={{ fontSize: "1.3rem" }}
                 onChange={onChange}
                 data-testid="input"
+                defaultValue={task?.important}
               >
                 <option default value="">
                   Choose an option:
@@ -88,12 +147,12 @@ const CreateModal = ({ onChange, handleCreate }) => {
             </button>
             <button
               data-bs-dismiss="modal"
-              onClick={handleCreate}
               type="button"
               className="fs-5 btn btn-success"
-              data-testid="create-btn"
+              data-testid="edit-btn"
+              onClick={handleEdit}
             >
-              Create
+              Edit
             </button>
           </div>
         </div>
@@ -102,4 +161,4 @@ const CreateModal = ({ onChange, handleCreate }) => {
   );
 };
 
-export default CreateModal;
+export default EditModal;

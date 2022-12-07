@@ -5,8 +5,9 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
   <div
     aria-hidden="true"
     class="modal fade"
-    data-testid="create-modal"
-    id="createTask"
+    data-testid="edit-modal"
+    id="editTaskundefined"
+    style="color: black;"
     tabindex="-1"
   >
     <div
@@ -21,9 +22,9 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
           <h5
             class="modal-title  fw-bold"
             data-testid="header"
-            id="createTaskLabel"
+            id="editTaskLabel"
           >
-             Create Task
+             Edit Task
           </h5>
           <button
             aria-label="Close"
@@ -52,6 +53,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
               name="title"
               placeholder="What is the title of this task?"
               type="text"
+              value=""
             />
           </div>
           <div
@@ -120,10 +122,10 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
           <button
             class="fs-5 btn btn-success"
             data-bs-dismiss="modal"
-            data-testid="create-btn"
+            data-testid="edit-btn"
             type="button"
           >
-            Create
+            Edit
           </button>
         </div>
       </div>

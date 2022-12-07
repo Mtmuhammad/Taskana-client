@@ -19,16 +19,13 @@ const Tasks = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [showTasks, setShowTasks] = useState();
   const [userTasks, setUserTasks] = useState();
-  const [important, setImportant] = useState();
-  const [complete, setComplete] = useState();
-  const [filter, setFilter] = useState([]);
+  const [importantTasks, setImportantTasks] = useState();
+  const [completeTasks, setCompleteTasks] = useState();
+  const [filteredTasks, setFilteredTasks] = useState();
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
-  const [showAll, setShowAll] = useState(true);
-  const [showImportant, setShowImportant] = useState(false);
-  const [showComplete, setShowComplete] = useState(false);
-  const [showFilter, setShowFilter] = useState(false);
   const [values, setValues] = useState({
     title: "",
     description: "",
@@ -47,6 +44,7 @@ const Tasks = () => {
           signal: controller.signal,
         });
         isMounted && setUserTasks(res.data.tasks);
+        setShowTasks(res.data.tasks);
         filterTasks(res);
       } catch (err) {
         console.log(err);
@@ -64,8 +62,10 @@ const Tasks = () => {
 
   // set important and complete state after fetching Tasks
   const filterTasks = (res) => {
-    setImportant(res.data.tasks.filter((task) => task.important === true) || 0);
-    setComplete(
+    setImportantTasks(
+      res.data.tasks.filter((task) => task.important === true) || 0
+    );
+    setCompleteTasks(
       res.data.tasks.filter((task) => task.status === "Completed") || 0
     );
   };
@@ -94,30 +94,21 @@ const Tasks = () => {
 
   // show all tasks
   const handleAll = () => {
-    setShowComplete(false);
-    setShowImportant(false);
-    setShowFilter(false);
-    setShowAll(true);
+    setShowTasks(userTasks);
     toggleActive("all", "important", "complete");
     clearInputs();
   };
 
   // show important tasks
   const handleImportant = () => {
-    setShowAll(false);
-    setShowComplete(false);
-    setShowFilter(false);
-    setShowImportant(true);
+    setShowTasks(importantTasks);
     toggleActive("important", "all", "complete");
     clearInputs();
   };
 
   // show complete tasks
   const handleComplete = () => {
-    setShowAll(false);
-    setShowImportant(false);
-    setShowFilter(false);
-    setShowComplete(true);
+    setShowTasks(completeTasks);
     toggleActive("complete", "all", "important");
     clearInputs();
   };
@@ -125,9 +116,8 @@ const Tasks = () => {
   // filter task results by title and description from text input
   const handleChange = (e) => {
     if (e.target.value === "") {
-      setShowFilter(false);
-      setFilter();
-      setShowAll(true);
+      setShowTasks(userTasks);
+      setFilteredTasks();
     }
 
     document.querySelector("#all").classList.remove("task-active");
@@ -146,11 +136,8 @@ const Tasks = () => {
 
     let results = [...filteredDesc, ...filteredTitle];
     const unique = [...new Map(results.map((r) => [r.id, r])).values()];
-    setFilter(unique);
-    setShowAll(false);
-    setShowImportant(false);
-    setShowComplete(false);
-    setShowFilter(true);
+    setFilteredTasks(unique);
+    setShowTasks(unique);
   };
 
   // handle form submission for task creation
@@ -176,6 +163,7 @@ const Tasks = () => {
       });
 
       isMounted && setUserTasks(res.data.tasks);
+      setShowTasks(res.data.tasks);
       setErrMsg("");
       setSuccess("Task Created!");
       clearInputs();
@@ -219,13 +207,13 @@ const Tasks = () => {
               onClick={handleImportant}
               title="important"
               icon="bx bx-star"
-              tasks={important}
+              tasks={importantTasks}
             />
             <FilterBtn
               onClick={handleComplete}
               title="complete"
               icon="bx bx-paper-plane"
-              tasks={complete}
+              tasks={completeTasks}
             />
           </div>
           {/* end filter btn group  */}
@@ -238,57 +226,19 @@ const Tasks = () => {
             <div>
               <div id="all-todo-container" className="p-3">
                 {/* all tasks */}
-                {showAll &&
-                  userTasks &&
-                  userTasks.map((task) => (
-                    <TaskItem
-                      setImportant={setImportant}
-                      setComplete={setComplete}
-                      setErrMsg={setErrMsg}
-                      setUserTasks={setUserTasks}
-                      key={task.id}
-                      task={task}
-                    />
-                  ))}
-                {/* important tasks */}
-                {showImportant &&
-                  important &&
-                  important.map((task) => (
-                    <TaskItem
-                      setImportant={setImportant}
-                      setComplete={setComplete}
-                      setErrMsg={setErrMsg}
-                      setUserTasks={setUserTasks}
-                      key={task.id}
-                      task={task}
-                    />
-                  ))}
-                {/* complete tasks */}
-                {showComplete &&
-                  complete &&
-                  complete.map((task) => (
-                    <TaskItem
-                      setImportant={setImportant}
-                      setComplete={setComplete}
-                      setErrMsg={setErrMsg}
-                      setUserTasks={setUserTasks}
-                      key={task.id}
-                      task={task}
-                    />
-                  ))}
-                {/* task from search results */}
-                {showFilter &&
-                  filter &&
-                  filter.map((task) => (
-                    <TaskItem
-                      setImportant={setImportant}
-                      setComplete={setComplete}
-                      setErrMsg={setErrMsg}
-                      setUserTasks={setUserTasks}
-                      key={task.id}
-                      task={task}
-                    />
-                  ))}
+                {showTasks
+                  ? showTasks.map((task) => (
+                      <TaskItem
+                        setShowTasks={setShowTasks}
+                        setSuccess={setSuccess}
+                        filterTasks={filterTasks}
+                        setErrMsg={setErrMsg}
+                        setUserTasks={setUserTasks}
+                        key={task.id}
+                        task={task}
+                      />
+                    ))
+                  : null}
               </div>
             </div>
             {/* end task container */}

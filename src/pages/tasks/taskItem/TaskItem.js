@@ -3,13 +3,15 @@
 import { useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from "../../../hooks/useAuth";
+import EditModal from "../editTask/EditModal";
 
 const TaskItem = ({
+  setShowTasks,
   task,
   setErrMsg,
-  setImportant,
-  setComplete,
+  filterTasks,
   setUserTasks,
+  setSuccess,
 }) => {
   const { auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
@@ -36,12 +38,8 @@ const TaskItem = ({
         signal: controller.signal,
       });
       isMounted && setUserTasks(res.data.tasks);
-      setImportant(
-        res.data.tasks.filter((task) => task.important === true) || 0
-      );
-      setComplete(
-        res.data.tasks.filter((task) => task.status === "Completed") || 0
-      );
+      setShowTasks(res.data.tasks);
+      filterTasks(res);
       setChecked(!checked);
     } catch (err) {
       setErrMsg(err?.response?.data?.error?.message);
@@ -72,12 +70,8 @@ const TaskItem = ({
         signal: controller.signal,
       });
       isMounted && setUserTasks(res.data.tasks);
-      setImportant(
-        res.data.tasks.filter((task) => task.important === true) || 0
-      );
-      setComplete(
-        res.data.tasks.filter((task) => task.status === "Completed") || 0
-      );
+      setShowTasks(res.data.tasks);
+      filterTasks(res);
       setChecked(!checked);
     } catch (err) {
       setErrMsg(err?.response?.data?.error?.message);
@@ -165,7 +159,12 @@ const TaskItem = ({
                 </span>
                 {/* task btn group */}
                 <div data-testid="task-btn-group" className="mt-3">
-                  <button className="task-btn btn btn-warning text-light me-3">
+                  <button
+                    type="button"
+                    className="task-btn btn btn-warning text-light me-3"
+                    data-bs-toggle="modal"
+                    data-bs-target={`#editTask${task?.id}`}
+                  >
                     Edit
                   </button>
                   <button className="task-btn btn btn-danger">Remove</button>
@@ -175,6 +174,15 @@ const TaskItem = ({
           </div>
         </div>
       </div>
+      {/* edit task modal */}
+      <EditModal
+        setUserTasks={setUserTasks}
+        setShowTasks={setShowTasks}
+        task={task}
+        setErrMsg={setErrMsg}
+        setSuccess={setSuccess}
+      />
+      
     </div>
   );
 };
