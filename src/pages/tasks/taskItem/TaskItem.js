@@ -4,6 +4,7 @@ import { useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from "../../../hooks/useAuth";
 import EditModal from "../editTask/EditModal";
+import DeleteModal from "../deleteTask/DeleteModal";
 
 const TaskItem = ({
   setShowTasks,
@@ -167,7 +168,14 @@ const TaskItem = ({
                   >
                     Edit
                   </button>
-                  <button className="task-btn btn btn-danger">Remove</button>
+                  <button
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target={`#deleteTask${task?.id}`}
+                    className="task-btn btn btn-danger"
+                  >
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>
@@ -182,7 +190,15 @@ const TaskItem = ({
         setErrMsg={setErrMsg}
         setSuccess={setSuccess}
       />
-      
+      {/* delete task modal */}
+      <DeleteModal
+        setUserTasks={setUserTasks}
+        setShowTasks={setShowTasks}
+        task={task}
+        setErrMsg={setErrMsg}
+        setSuccess={setSuccess}
+        filterTasks={filterTasks}
+      />
     </div>
   );
 };

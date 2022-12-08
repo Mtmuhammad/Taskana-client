@@ -234,6 +234,7 @@ const Tasks = () => {
                         filterTasks={filterTasks}
                         setErrMsg={setErrMsg}
                         setUserTasks={setUserTasks}
+                        userTasks={userTasks}
                         key={task.id}
                         task={task}
                       />
