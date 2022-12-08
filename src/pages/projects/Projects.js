@@ -1,3 +1,5 @@
+// Project page component
+
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,7 +9,7 @@ import ProjectCard from "./projectCard/ProjectCard";
 import useAuth from "../../hooks/useAuth";
 import CreateModal from "./createProject/CreateModal";
 import SuccessMsg from "../../components/successMsg/SuccessMsg";
-import ErrMsg from "../../components/errorMsg/ErrorMsg";
+import ErrorMsg from "../../components/errorMsg/ErrorMsg";
 import CreateBtn from "../../components/createBtn/CreateBtn";
 
 const Projects = () => {
@@ -108,11 +110,15 @@ const Projects = () => {
         <Breadcrumb page="Projects" />
         <div className="container">
           {auth.user.isAdmin && <CreateBtn name={"Project"} />}
+
           {/* error message */}
-          {errMsg && <ErrMsg errorMsg={errMsg} setErrMsg={setErrMsg} />}
+          {errMsg ? <ErrorMsg errMsg={errMsg} setErrMsg={setErrMsg} /> : null}
 
           {/* success message */}
-          {success && <SuccessMsg success={success} setSuccess={setSuccess} />}
+          {success ? (
+            <SuccessMsg success={success} setSuccess={setSuccess} />
+          ) : null}
+
           {/* all projects */}
           <div className="row">
             {projects

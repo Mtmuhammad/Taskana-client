@@ -1,0 +1,20 @@
+@use "../../../styles/abstracts/_variables" as *;
+@use "../../../styles/abstracts/_mixins" as *;
+
+
+.tickets {
+   & .card {
+      background-color: var(--primary-color-light);
+      color: var(--text-color);
+   }
+}
+
+.ticketBox {
+   & h1 {
+      font-size: 4.5rem;
+   }
+
+   & h6 {
+      font-size: 1.8rem;
+   }
+}
