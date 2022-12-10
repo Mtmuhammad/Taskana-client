@@ -1,6 +1,6 @@
 // Table to display all tickets on ticket page
 
-import { React, useState } from "react";
+import { React} from "react";
 import DataTable from "react-data-table-component";
 import "../ticketBox/TicketBox.scss";
 import useAuth from "../../../hooks/useAuth";
@@ -8,7 +8,6 @@ import useAuth from "../../../hooks/useAuth";
 
 const TicketTable = ({ showTickets }) => {
   const { auth } = useAuth();
-  const [data, setData] = useState(showTickets);
 
   const adminColumns = [
     {
@@ -144,7 +143,7 @@ const TicketTable = ({ showTickets }) => {
   return (
     <DataTable
       columns={auth?.user?.isAdmin ? adminColumns : userColumns}
-      data={data}
+      data={showTickets}
       expandableRows
       expandableRowsComponent={ExpandedComponent}
       pagination

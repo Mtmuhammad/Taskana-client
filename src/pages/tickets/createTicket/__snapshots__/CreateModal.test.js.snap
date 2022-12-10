@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="modal fade"
+    data-testid="create-modal"
+    id="createTicket"
+    tabindex="-1"
+  >
+    <div
+      class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable"
+    >
+      <div
+        class="modal-content"
+      >
+        <div
+          class="modal-header"
+        >
+          <h5
+            class="modal-title  fw-bold"
+            data-testid="header"
+            id="createTicketLabel"
+          >
+             Create Ticket
+          </h5>
+          <button
+            aria-label="Close"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            data-testid="close-btn"
+            type="button"
+          />
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="title"
+            >
+              Ticket Title
+            </label>
+            <input
+              class="form-control"
+              data-testid="input"
+              id="title"
+              name="title"
+              placeholder="What is the title of this ticket?"
+              type="text"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="createTicketDescription"
+            >
+              Description (optional)
+            </label>
+            <textarea
+              class="form-control"
+              data-testid="input"
+              id="createTicketDescription"
+              name="description"
+              placeholder="Add any extra details about the ticket"
+              rows="3"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="createTicketAssignedTo"
+            >
+              Assigned Name
+            </label>
+            <select
+              class="form-control"
+              data-testid="input"
+              id="createTicketAssignedTo"
+              name="assignedTo"
+              style="font-size: 1.3rem;"
+            >
+              <option
+                default=""
+                value=""
+              >
+                Choose a team member:
+              </option>
+            </select>
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="createTicketProjectId"
+            >
+              Project Name
+            </label>
+            <select
+              class="form-control"
+              data-testid="input"
+              id="createTicketProjectId"
+              name="projectId"
+              style="font-size: 1.3rem;"
+            >
+              <option
+                default=""
+                value=""
+              >
+                Choose a project:
+              </option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <button
+            class="fs-5 btn btn-secondary"
+            data-bs-dismiss="modal"
+            data-testid="cancel-btn"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="fs-5 btn btn-success"
+            data-bs-dismiss="modal"
+            data-testid="create-btn"
+            type="button"
+          >
+            Create
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
