@@ -10,6 +10,11 @@
 }
 
 .ticketBox {
+   transition: all 0.3s ease;
+
+   &:hover{
+      transform: scale(1.05)
+   }
    & h1 {
       font-size: 4.5rem;
    }
@@ -17,4 +22,26 @@
    & h6 {
       font-size: 1.8rem;
    }
+}
+
+.rdt_Pagination, .rdt_TableRow, .rdt_TableHeadRow, .rdt_ExpanderRow, #ticket-select{
+   background-color: var(--primary-color-light)!important;
+   color: var(--text-color)!important;
+}
+
+.eiPgcm{
+   color: grey!important;
+}
+
+.rdt_TableHeadRow {
+   font-size: 1.6rem;
+}
+
+.rdt_TableRow {
+   font-size: 1.4rem;
+}
+
+.ticket-btn {
+   font-size: 1.6rem;
+    margin-top: 0.4rem;
 }

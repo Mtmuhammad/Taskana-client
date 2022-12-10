@@ -45,11 +45,10 @@ body.dark .switch::before {
 .pages {
   position: absolute;
   top: 0;
-  top: 0;
   left: 25rem;
   height: 100vh;
   width: calc(100% - 25rem);
-  background-color: var(--body-color);
+  //background-color: var(--body-color);
   transition: all 0.3s ease;
   padding: 4rem;
 }

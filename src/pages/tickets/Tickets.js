@@ -1,6 +1,6 @@
 // Ticket page component
 
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -9,8 +9,10 @@ import useAuth from "../../hooks/useAuth";
 import CreateBtn from "../../components/createBtn/CreateBtn";
 import ErrorMsg from "../../components/errorMsg/ErrorMsg";
 import SuccessMsg from "../../components/successMsg/SuccessMsg";
+import Spinner from "../../components/spinner/Spinner";
 import TicketBox from "../tickets/ticketBox/TicketBox";
 import "./ticketBox/TicketBox.scss";
+import TicketTable from "./ticketTable/TicketTable";
 
 const Tickets = () => {
   const { auth } = useAuth();
@@ -25,32 +27,53 @@ const Tickets = () => {
   const [incompleteTickets, setIncompleteTickets] = useState();
   const [completeTickets, setCompleteTickets] = useState();
   const [showTickets, setShowTickets] = useState();
+  const [isLoading, setIsLoading] = useState(false)
 
   // get all tickets
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
+    setIsLoading(true)
 
     const getTickets = async () => {
       try {
         const res = await axiosPrivate.get(`/tickets`, {
           signal: controller.signal,
         });
-        isMounted && setAllTickets(res.data.tickets);
-        setShowTickets(res.data.tickets);
+
+        let tickets = res.data.tickets.map(async (ticket) => {
+          let result = await axiosPrivate.get(`/projects/${ticket.projectId}`, {
+            signal: controller.signal,
+          });
+          let nameResult = await axiosPrivate.get(
+            `/users/${ticket.assignedTo}`,
+            {
+              signal: controller.signal,
+            }
+          );
+          ticket[
+            "assignedName"
+          ] = `${nameResult.data.user.firstName} ${nameResult.data.user.lastName}`;
+          ticket["projectName"] = result.data.project.name;
+          return ticket;
+        });
+
+        tickets = await Promise.all(tickets);
+
+        isMounted && setAllTickets(tickets);
+        setShowTickets(tickets);
+        setIsLoading(false)
 
         setAssignedTickets(
-          res.data.tickets.filter(
+          tickets.filter(
             (ticket) => ticket.assignedTo === auth?.user?.empNumber
           ) || 0
         );
         setIncompleteTickets(
-          res.data.tickets.filter(
-            (ticket) => ticket.status === "In Progress"
-          ) || 0
+          tickets.filter((ticket) => ticket.status === "In Progress") || 0
         );
         setCompleteTickets(
-          res.data.tickets.filter((ticket) => ticket.status === "Complete") || 0
+          tickets.filter((ticket) => ticket.status === "Complete") || 0
         );
       } catch (err) {
         console.log(err);
@@ -59,10 +82,12 @@ const Tickets = () => {
     };
 
     getTickets();
+    
 
     return () => {
       isMounted = false;
       controller.abort();
+      
     };
   }, [auth?.user?.empNumber, axiosPrivate, location, navigate]);
 
@@ -92,7 +117,7 @@ const Tickets = () => {
                       <TicketBox
                         name={"Total"}
                         tickets={allTickets}
-                        color={"#ff5050"}
+                        color={"#00d09c"}
                       />
                     )}
                     {incompleteTickets && (
@@ -113,10 +138,19 @@ const Tickets = () => {
                       <TicketBox
                         name={"Closed"}
                         tickets={completeTickets}
-                        color={"#00d09c"}
+                        color={"#ff5050"}
                       />
                     )}
                     {/* end ticket box container */}
+                  </div>
+                  <div className="row">
+                    <div className="col-12">
+                      {/* loading spinner */}
+                      {isLoading && <Spinner/>}
+
+                      {/* ticket table */}
+                      {showTickets && <TicketTable showTickets={showTickets} />}
+                    </div>
                   </div>
                 </div>
               </div>

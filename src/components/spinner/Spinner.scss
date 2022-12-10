@@ -1,0 +1,20 @@
+@use "../../Styles/abstracts/mixins" as *;
+@use "../../Styles/abstracts/variables" as *;
+
+@keyframes spinner {
+   0% {
+     transform: rotate(0deg);
+   }
+   100% {
+     transform: rotate(360deg);
+   }
+ }
+ .loading-spinner {
+   width: 150px;
+   height: 150px;
+   border: 10px solid #f3f3f3; /* Light grey */
+   border-top: 10px solid $primary-green;
+   border-radius: 50%;
+   animation: spinner 1.5s linear infinite;
+   margin: 30px auto;
+ }

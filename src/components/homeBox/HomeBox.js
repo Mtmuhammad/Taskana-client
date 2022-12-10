@@ -1,6 +1,8 @@
 // Home page component for to display individual db info
 
+import React from 'react'
 import "./HomeBox.scss";
+
 const HomeBox = ({ icon, type, number, bgColor }) => {
   return (
     <>

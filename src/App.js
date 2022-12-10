@@ -9,6 +9,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import RequireAuth from "./components/requireAuth/RequireAuth";
 import PersistLogin from "./components/persist/PersistLogin";
+import React from 'react'
 
 // set light or dark mode on body
 const dark = localStorage.getItem("isDark");

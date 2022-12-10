@@ -9,7 +9,7 @@ import ProjectCard from "./projectCard/ProjectCard";
 import useAuth from "../../hooks/useAuth";
 import CreateModal from "./createProject/CreateModal";
 import SuccessMsg from "../../components/successMsg/SuccessMsg";
-import ErrorMsg from "../../components/errorMsg/ErrorMsg";
+import ErrMsg from "../../components/errorMsg/ErrorMsg";
 import CreateBtn from "../../components/createBtn/CreateBtn";
 
 const Projects = () => {
@@ -110,15 +110,11 @@ const Projects = () => {
         <Breadcrumb page="Projects" />
         <div className="container">
           {auth.user.isAdmin && <CreateBtn name={"Project"} />}
-
           {/* error message */}
-          {errMsg ? <ErrorMsg errMsg={errMsg} setErrMsg={setErrMsg} /> : null}
+          {errMsg && <ErrMsg errorMsg={errMsg} setErrMsg={setErrMsg} />}
 
           {/* success message */}
-          {success ? (
-            <SuccessMsg success={success} setSuccess={setSuccess} />
-          ) : null}
-
+          {success && <SuccessMsg success={success} setSuccess={setSuccess} />}
           {/* all projects */}
           <div className="row">
             {projects

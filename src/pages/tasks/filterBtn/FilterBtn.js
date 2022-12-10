@@ -1,4 +1,5 @@
 // Button to filter task results by status, completion, or importance
+import React from 'react'
 
 const FilterBtn = ({ onClick, title, icon, tasks }) => {
   return (

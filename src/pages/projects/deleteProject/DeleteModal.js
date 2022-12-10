@@ -2,6 +2,7 @@
 
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import "../projectCard/ProjectCard.scss";
+import React from 'react'
 
 const DeleteModal = ({
   setProjects,

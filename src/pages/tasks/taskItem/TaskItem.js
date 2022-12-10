@@ -1,6 +1,6 @@
 // an individual task to be rendered in task table
 
-import { useState } from "react";
+import { React, useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from "../../../hooks/useAuth";
 import EditModal from "../editTask/EditModal";

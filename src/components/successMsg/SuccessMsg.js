@@ -1,4 +1,5 @@
 // Component to show success msg for CRUD operations
+import React from 'react'
 
 const SuccessMsg = ({ success, setSuccess }) => {
   return (

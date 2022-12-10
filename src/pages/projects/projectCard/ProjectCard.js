@@ -1,6 +1,6 @@
 // Component that displays project information on project page
 
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
@@ -44,7 +44,7 @@ const ProjectCard = ({
           (ticket) => ticket.projectId === project.id
         );
         const closed = res.data.tickets.filter(
-          (ticket) => ticket.status === "Completed"
+          (ticket) => ticket.status === "Complete"
         );
         isMounted && setTickets(tickets);
         setClosedTickets(closed);

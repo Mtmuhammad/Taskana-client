@@ -1,8 +1,6 @@
-// Task page component
-
 import Sidebar from "../../components/sidebar/Sidebar";
 import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -10,7 +8,7 @@ import TaskItem from "./taskItem/TaskItem";
 import FilterBtn from "../tasks/filterBtn/FilterBtn";
 import FilterInput from "../tasks/filterInput/FilterInput";
 import SuccessMsg from "../../components/successMsg/SuccessMsg";
-import ErrorMsg from "../../components/errorMsg/ErrorMsg";
+import ErrMsg from "../../components/errorMsg/ErrorMsg";
 import CreateBtn from "../../components/createBtn/CreateBtn";
 import CreateModal from "../tasks/createTask/CreateModal";
 import "./taskItem/TaskItem.scss";
@@ -191,12 +189,10 @@ const Tasks = () => {
         <CreateBtn name={"Task"} />
 
         {/* error message */}
-        {errMsg ? <ErrorMsg errMsg={errMsg} setErrMsg={setErrMsg} /> : null}
+        {errMsg ? <ErrMsg errorMsg={errMsg} setErrMsg={setErrMsg} /> : null}
 
         {/* success message */}
-        {success ? (
-          <SuccessMsg success={success} setSuccess={setSuccess} />
-        ) : null}
+        {success && <SuccessMsg success={success} setSuccess={setSuccess} />}
 
         {/* filer btn group */}
         <div className="tasks card mx-auto overflow-auto">

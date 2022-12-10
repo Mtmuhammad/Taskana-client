@@ -1,4 +1,5 @@
 // Table to display users form db
+import React from 'react'
 
 const UserTable = ({users}) => {
   return (

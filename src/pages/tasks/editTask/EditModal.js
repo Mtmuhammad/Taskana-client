@@ -1,7 +1,7 @@
 // Modal to edit a new task
 
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { useState } from "react";
+import { React, useState } from "react";
 import "../taskItem/TaskItem.scss";
 import useAuth from "../../../hooks/useAuth";
 

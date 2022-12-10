@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-dmctIk WQNxq"
+  >
+    <div
+      class="sc-fLcnxK dApqnJ"
+    >
+      <div
+        class="sc-bcXHqe kVrXuC rdt_Table"
+        role="table"
+      >
+        <div
+          class="sc-iveFHk bzRnkJ"
+        >
+          <div
+            style="padding: 24px;"
+          >
+            There are no records to display
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

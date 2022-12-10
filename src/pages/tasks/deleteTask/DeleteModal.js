@@ -2,6 +2,7 @@
 
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from "../../../hooks/useAuth";
+import React from 'react'
 
 const DeleteModal = ({
   setShowTasks,

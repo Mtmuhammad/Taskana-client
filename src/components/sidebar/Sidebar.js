@@ -2,7 +2,7 @@
 
 import "./Sidebar.scss";
 import { useNavigate, NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import useAuth from "../../hooks/useAuth";
 import useLogout from "../../hooks/useLogout";
 

@@ -1,4 +1,5 @@
 // text input to search and filter tasks
+import React from 'react'
 
 const FilterInput = ({ handleChange }) => {
   return (

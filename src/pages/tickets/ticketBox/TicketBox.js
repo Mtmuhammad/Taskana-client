@@ -1,6 +1,7 @@
 // ticket box component for ticket page
+import React from 'react' 
 
-const TicketBox = ({ name, tickets, color }) => {
+const TicketBox = ({ setShowTickets, name, tickets, color }) => {
   return (
     <div className="col-md-6 col-lg-3">
       <div

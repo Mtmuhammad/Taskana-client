@@ -1,4 +1,5 @@
 // Modal to create a new task
+import React from 'react'
 
 const CreateModal = ({ onChange, handleCreate }) => {
   return (

@@ -1,4 +1,5 @@
 // Component to show error msg for CRUD operations
+import React from 'react'
 
 const ErrorMsg = ({ errMsg, setErrMsg }) => {
   return (

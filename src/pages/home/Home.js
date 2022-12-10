@@ -1,6 +1,6 @@
 // Home page component
 
-import { useState, useEffect } from "react";
+import { React, useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
