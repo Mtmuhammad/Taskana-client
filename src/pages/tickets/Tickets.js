@@ -13,7 +13,7 @@ import Spinner from "../../components/spinner/Spinner";
 import TicketBox from "../tickets/ticketBox/TicketBox";
 import "./ticketBox/TicketBox.scss";
 import TicketTable from "./ticketTable/TicketTable";
-import CreateModal from './createTicket/CreateModal'
+import CreateModal from "./createTicket/CreateModal";
 
 const Tickets = () => {
   const { auth } = useAuth();
@@ -28,8 +28,8 @@ const Tickets = () => {
   const [incompleteTickets, setIncompleteTickets] = useState();
   const [completeTickets, setCompleteTickets] = useState();
   const [showTickets, setShowTickets] = useState();
-  const [isLoading, setIsLoading] = useState(false)
-  const [values, setValues] = useState({createdBy: auth?.user?.empNumber,});
+  const [isLoading, setIsLoading] = useState(false);
+  const [values, setValues] = useState({ createdBy: auth?.user?.empNumber });
   const [users, setUsers] = useState();
   const [projects, setProjects] = useState();
 
@@ -37,7 +37,7 @@ const Tickets = () => {
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    setIsLoading(true)
+    setIsLoading(true);
 
     const getTickets = async () => {
       try {
@@ -74,9 +74,9 @@ const Tickets = () => {
 
         isMounted && setAllTickets(tickets);
         setShowTickets(tickets);
-        setIsLoading(false)
-        setUsers(userRes.data.users)
-        setProjects(projectRes.data.projects)
+        setIsLoading(false);
+        setUsers(userRes.data.users);
+        setProjects(projectRes.data.projects);
         setAssignedTickets(
           tickets.filter(
             (ticket) => ticket.assignedTo === auth?.user?.empNumber
@@ -95,30 +95,26 @@ const Tickets = () => {
     };
 
     getTickets();
-    
 
     return () => {
       isMounted = false;
       controller.abort();
-      
     };
   }, [auth?.user?.empNumber, axiosPrivate, location, navigate]);
-  
 
-   // set input values in state
-   const onChange = (e) => {
+  // set input values in state
+  const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-
-   // handle form submission for ticket creation
-   const handleCreate = async (e) => {
+  // handle form submission for ticket creation
+  const handleCreate = async (e) => {
     let isMounted = true;
     const controller = new AbortController();
     e.preventDefault();
     let formData = { ...values };
-    formData.projectId = +formData.projectId
-    formData.assignedTo = +formData.assignedTo
+    formData.projectId = +formData.projectId;
+    formData.assignedTo = +formData.assignedTo;
 
     try {
       await axiosPrivate.post(
@@ -139,12 +135,9 @@ const Tickets = () => {
         let result = await axiosPrivate.get(`/projects/${ticket.projectId}`, {
           signal: controller.signal,
         });
-        let nameResult = await axiosPrivate.get(
-          `/users/${ticket.assignedTo}`,
-          {
-            signal: controller.signal,
-          }
-        );
+        let nameResult = await axiosPrivate.get(`/users/${ticket.assignedTo}`, {
+          signal: controller.signal,
+        });
         ticket[
           "assignedName"
         ] = `${nameResult.data.user.firstName} ${nameResult.data.user.lastName}`;
@@ -155,27 +148,26 @@ const Tickets = () => {
       tickets = await Promise.all(tickets);
 
       isMounted && setAllTickets(tickets);
-      setShowTickets()
-        setShowTickets(tickets);
-        setIsLoading(false)
+      setShowTickets();
+      setShowTickets(tickets);
+      setIsLoading(false);
 
-        setAssignedTickets(
-          tickets.filter(
-            (ticket) => ticket.assignedTo === auth?.user?.empNumber
-          ) || 0
-        );
-        setIncompleteTickets(
-          tickets.filter((ticket) => ticket.status === "In Progress") || 0
-        );
-        setCompleteTickets(
-          tickets.filter((ticket) => ticket.status === "Complete") || 0
-        );
-
+      setAssignedTickets(
+        tickets.filter(
+          (ticket) => ticket.assignedTo === auth?.user?.empNumber
+        ) || 0
+      );
+      setIncompleteTickets(
+        tickets.filter((ticket) => ticket.status === "In Progress") || 0
+      );
+      setCompleteTickets(
+        tickets.filter((ticket) => ticket.status === "Complete") || 0
+      );
 
       setErrMsg("");
       setSuccess("Ticket Created!");
       clearInputs();
-      setValues({createdBy: auth?.user?.empNumber,});
+      setValues({ createdBy: auth?.user?.empNumber });
     } catch (err) {
       setErrMsg(err?.response?.data?.error?.message);
     }
@@ -186,8 +178,8 @@ const Tickets = () => {
     };
   };
 
-   // clear input on success, clear search filter input
-   const clearInputs = () => {
+  // clear input on success, clear search filter input
+  const clearInputs = () => {
     document.querySelectorAll("input").forEach((input) => {
       input.value = "";
     });
@@ -251,10 +243,25 @@ const Tickets = () => {
                   <div className="row">
                     <div className="col-12">
                       {/* loading spinner */}
-                      {isLoading && <Spinner/>}
+                      {isLoading && <Spinner />}
 
                       {/* ticket table */}
-                      {showTickets ? <TicketTable showTickets={showTickets} /> : null}
+                      {showTickets ? (
+                        <TicketTable
+                        setSuccess={setSuccess}
+                        setErrMsg={setErrMsg}
+                          users={users}
+                          projects={projects}
+                          setAllTickets={setAllTickets}
+                          showTickets={showTickets}
+                          setShowTickets={setShowTickets}
+                          setAssignedTickets={setAssignedTickets}
+                          setIncompleteTickets={setIncompleteTickets}
+                          setCompleteTickets={setCompleteTickets}
+                          setIsLoading={setIsLoading}
+
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -262,8 +269,13 @@ const Tickets = () => {
             </div>
           </div>
         </div>
-         {/* create task modal */}
-         <CreateModal projects={projects} users={users} onChange={onChange} handleCreate={handleCreate} />
+        {/* create task modal */}
+        <CreateModal
+          projects={projects}
+          users={users}
+          onChange={onChange}
+          handleCreate={handleCreate}
+        />
         {/* end create task modal */}
       </section>
     </>

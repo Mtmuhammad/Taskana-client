@@ -1,12 +1,24 @@
 // Table to display all tickets on ticket page
 
-import { React} from "react";
+import { React } from "react";
 import DataTable from "react-data-table-component";
 import "../ticketBox/TicketBox.scss";
 import useAuth from "../../../hooks/useAuth";
+import EditModal from "../editTicket/EditModal";
 
-
-const TicketTable = ({ showTickets }) => {
+const TicketTable = ({
+  setAllTickets,
+  setShowTickets,
+  setAssignedTickets,
+  setIncompleteTickets,
+  setCompleteTickets,
+  projects,
+  users,
+  showTickets,
+  setIsLoading,
+  setSuccess,
+  setErrMsg
+}) => {
   const { auth } = useAuth();
 
   const adminColumns = [
@@ -63,6 +75,19 @@ const TicketTable = ({ showTickets }) => {
           >
             <i style={{ color: "#ffc36d" }} className="bx bxs-edit"></i>
           </button>
+          <EditModal
+         setSuccess={setSuccess}
+         setErrMsg={setErrMsg}
+          setIsLoading={setIsLoading}
+            setAllTickets={setAllTickets}
+            setShowTickets={setShowTickets}
+            setAssignedTickets={setAssignedTickets}
+            setIncompleteTickets={setIncompleteTickets}
+            setCompleteTickets={setCompleteTickets}
+            users={users}
+            projects={projects}
+            ticket={row}
+          />
           <button
             type="button"
             className="ticket-btn btn btn-outline-secondary"

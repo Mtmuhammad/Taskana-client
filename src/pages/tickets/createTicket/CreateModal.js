@@ -75,7 +75,7 @@ const CreateModal = ({ projects, users, onChange, handleCreate }) => {
                 </option>
                 {users &&
                   users.map((user) => (
-                    <option value={user?.empNumber}>
+                    <option key={user?.empNumber} value={user?.empNumber}>
                       {user?.firstName} {user?.lastName} ({user.empRole})
                     </option>
                   ))}
@@ -96,7 +96,7 @@ const CreateModal = ({ projects, users, onChange, handleCreate }) => {
                 </option>
                 {projects &&
                   projects.map((project) => (
-                    <option value={project?.id}>{project?.name}</option>
+                    <option key={project?.id} value={project?.id}>{project?.name}</option>
                   ))}
               </select>
             </div>
