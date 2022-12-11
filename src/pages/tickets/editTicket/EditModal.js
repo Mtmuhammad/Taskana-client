@@ -12,7 +12,7 @@ const EditModal = ({
   setShowTickets,
   setAssignedTickets,
   setIncompleteTickets,
-  setCompleteTickets,
+  setOpenTickets,
   setIsLoading,
   setSuccess,
   setErrMsg,
@@ -80,8 +80,8 @@ const EditModal = ({
         setIncompleteTickets(
           tickets.filter((ticket) => ticket.status === "In Progress") || 0
         );
-        setCompleteTickets(
-          tickets.filter((ticket) => ticket.status === "Complete") || 0
+        setOpenTickets(
+          tickets.filter((ticket) => ticket.status === "Open") || 0
         );
 
 

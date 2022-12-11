@@ -26,7 +26,7 @@ const Tickets = () => {
   const [allTickets, setAllTickets] = useState();
   const [assignedTickets, setAssignedTickets] = useState();
   const [incompleteTickets, setIncompleteTickets] = useState();
-  const [completeTickets, setCompleteTickets] = useState();
+  const [openTickets, setOpenTickets] = useState();
   const [showTickets, setShowTickets] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [values, setValues] = useState({ createdBy: auth?.user?.empNumber });
@@ -85,8 +85,8 @@ const Tickets = () => {
         setIncompleteTickets(
           tickets.filter((ticket) => ticket.status === "In Progress") || 0
         );
-        setCompleteTickets(
-          tickets.filter((ticket) => ticket.status === "Complete") || 0
+        setOpenTickets(
+          tickets.filter((ticket) => ticket.status === "Open") || 0
         );
       } catch (err) {
         console.log(err);
@@ -160,8 +160,8 @@ const Tickets = () => {
       setIncompleteTickets(
         tickets.filter((ticket) => ticket.status === "In Progress") || 0
       );
-      setCompleteTickets(
-        tickets.filter((ticket) => ticket.status === "Complete") || 0
+      setOpenTickets(
+        tickets.filter((ticket) => ticket.status === "Open") || 0
       );
 
       setErrMsg("");
@@ -215,6 +215,7 @@ const Tickets = () => {
                         name={"Total"}
                         tickets={allTickets}
                         color={"#00d09c"}
+                        setShowTickets={setShowTickets}
                       />
                     )}
                     {incompleteTickets && (
@@ -222,6 +223,7 @@ const Tickets = () => {
                         name={"In Progress"}
                         tickets={incompleteTickets}
                         color={"#ffc36d"}
+                        setShowTickets={setShowTickets}
                       />
                     )}
                     {assignedTickets && (
@@ -229,13 +231,15 @@ const Tickets = () => {
                         name={"Assigned"}
                         tickets={assignedTickets}
                         color={"#15cfff"}
+                        setShowTickets={setShowTickets}
                       />
                     )}
-                    {completeTickets && (
+                    {openTickets && (
                       <TicketBox
-                        name={"Closed"}
-                        tickets={completeTickets}
+                        name={"Open"}
+                        tickets={openTickets}
                         color={"#ff5050"}
+                        setShowTickets={setShowTickets}
                       />
                     )}
                     {/* end ticket box container */}
@@ -257,7 +261,7 @@ const Tickets = () => {
                           setShowTickets={setShowTickets}
                           setAssignedTickets={setAssignedTickets}
                           setIncompleteTickets={setIncompleteTickets}
-                          setCompleteTickets={setCompleteTickets}
+                          setOpenTickets={setOpenTickets}
                           setIsLoading={setIsLoading}
 
                         />

@@ -5,6 +5,7 @@ const TicketBox = ({ setShowTickets, name, tickets, color }) => {
   return (
     <div className="col-md-6 col-lg-3">
       <div
+      onClick={() => setShowTickets(tickets)}
         data-testid="ticket-box"
         style={{
           borderColor: `${color}20`,

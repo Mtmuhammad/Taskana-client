@@ -1,39 +1,74 @@
-// Modal to delete a new task
+// Modal to delete a new ticket
 
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from "../../../hooks/useAuth";
 import React from 'react'
 
 const DeleteModal = ({
-  setShowTasks,
-  filterTasks,
-  setUserTasks,
-  task,
+  setShowTickets,
+  setAssignedTickets,
+  setIncompleteTickets,
+  setOpenTickets,
+  setAllTickets,
+  setIsLoading,
+  ticket,
   setSuccess,
   setErrMsg,
 }) => {
   const { auth } = useAuth();
   const axiosPrivate = useAxiosPrivate();
 
-  // handle form submission for task deletion
+  // handle form submission for ticket deletion
   const handleDelete = async (e) => {
     e.preventDefault();
     try {
       let isMounted = true;
       const controller = new AbortController();
-      const id = task.id;
-      await axiosPrivate.delete(`/tasks/${id}`, {
+      const id = ticket.id;
+      await axiosPrivate.delete(`/tickets/${id}`, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
 
-      const res = await axiosPrivate.get(`/tasks/${auth?.user?.empNumber}`, {
+      const res = await axiosPrivate.get(`/tickets`, {
         signal: controller.signal,
       });
-      isMounted && setUserTasks(res.data.tasks);
-      setShowTasks(res.data.tasks);
-      filterTasks(res);
-      setSuccess("Task Deleted!");
+
+      let tickets = res.data.tickets.map(async (ticket) => {
+        let result = await axiosPrivate.get(`/projects/${ticket.projectId}`, {
+          signal: controller.signal,
+        });
+        let nameResult = await axiosPrivate.get(`/users/${ticket.assignedTo}`, {
+          signal: controller.signal,
+        });
+        ticket[
+          "assignedName"
+        ] = `${nameResult.data.user.firstName} ${nameResult.data.user.lastName}`;
+        ticket["projectName"] = result.data.project.name;
+        return ticket;
+      });
+
+      tickets = await Promise.all(tickets);
+
+      isMounted && setAllTickets(tickets);
+      setShowTickets();
+      setShowTickets(tickets);
+      setIsLoading(false);
+
+      setAssignedTickets(
+        tickets.filter(
+          (ticket) => ticket.assignedTo === auth?.user?.empNumber
+        ) || 0
+      );
+      setIncompleteTickets(
+        tickets.filter((ticket) => ticket.status === "In Progress") || 0
+      );
+      setOpenTickets(
+        tickets.filter((ticket) => ticket.status === "Open") || 0
+      );
+
+      setErrMsg("");
+      setSuccess("Ticket Deleted!");
     } catch (err) {
       setErrMsg(err?.response?.data?.error?.message);
     }
@@ -42,7 +77,7 @@ const DeleteModal = ({
   return (
     <div
       className="modal fade"
-      id={`deleteTask${task?.id}`}
+      id={`deleteTicket${ticket?.id}`}
       tabIndex="-1"
       aria-hidden="true"
       style={{ display: "none", color: "black" }}

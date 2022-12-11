@@ -2,7 +2,7 @@
 
 import { React, useState, useEffect } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 import "./ProjectCard.scss";
 import DeleteModal from "../deleteProject/DeleteModal";
@@ -41,19 +41,18 @@ const ProjectCard = ({
 
         setInfo(result.data.project);
         const tickets = res.data.tickets.filter(
-          (ticket) => ticket.projectId === project.id
+          (ticket) => ticket.projectId === info?.id
         );
         const closed = res.data.tickets.filter(
-          (ticket) => ticket.status === "Complete"
+          (ticket) =>
+            ticket.status === "Complete" && ticket.projectId === info?.id
         );
         isMounted && setTickets(tickets);
         setClosedTickets(closed);
 
-        tickets?.length !== 0 &&
-          setProgress(
-            Math.round((closedTickets?.length / tickets?.length) * 100) ||
-              Number(0)
-          );
+        tickets?.length === 0 || closed?.length === 0
+          ? setProgress(0)
+          : setProgress(Math.round((closed?.length / tickets?.length) * 100));
       } catch (err) {
         console.log(err);
         navigate("/login", { state: { from: location }, replace: true });
@@ -155,7 +154,9 @@ const ProjectCard = ({
             </div>
           </div>
           <div className="dividers-block"></div>
-          <div data-testid="project-description" className="mt-4 h5">{info?.description}</div>
+          <div data-testid="project-description" className="mt-4 h5">
+            {info?.description}
+          </div>
           <div className="d-flex align-items-center justify-content-center mt-3 mb-2">
             <h5 className="fw-bold mb-0">Progress</h5>
           </div>

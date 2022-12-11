@@ -5,13 +5,14 @@ import DataTable from "react-data-table-component";
 import "../ticketBox/TicketBox.scss";
 import useAuth from "../../../hooks/useAuth";
 import EditModal from "../editTicket/EditModal";
+import DeleteModal from"../deleteTicket/DeleteModal"
 
 const TicketTable = ({
   setAllTickets,
   setShowTickets,
   setAssignedTickets,
   setIncompleteTickets,
-  setCompleteTickets,
+  setOpenTickets,
   projects,
   users,
   showTickets,
@@ -83,7 +84,7 @@ const TicketTable = ({
             setShowTickets={setShowTickets}
             setAssignedTickets={setAssignedTickets}
             setIncompleteTickets={setIncompleteTickets}
-            setCompleteTickets={setCompleteTickets}
+            setOpenTickets={setOpenTickets}
             users={users}
             projects={projects}
             ticket={row}
@@ -96,6 +97,17 @@ const TicketTable = ({
           >
             <i style={{ color: "#ff5050" }} className="bx bx-trash"></i>
           </button>
+          <DeleteModal
+         setSuccess={setSuccess}
+         setErrMsg={setErrMsg}
+          setIsLoading={setIsLoading}
+            setAllTickets={setAllTickets}
+            setShowTickets={setShowTickets}
+            setAssignedTickets={setAssignedTickets}
+            setIncompleteTickets={setIncompleteTickets}
+            setOpenTickets={setOpenTickets}
+            ticket={row}
+          />
         </div>
       ),
       sortable: true,
