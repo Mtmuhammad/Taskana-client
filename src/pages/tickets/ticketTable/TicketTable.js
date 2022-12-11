@@ -5,9 +5,10 @@ import DataTable from "react-data-table-component";
 import "../ticketBox/TicketBox.scss";
 import useAuth from "../../../hooks/useAuth";
 import EditModal from "../editTicket/EditModal";
-import DeleteModal from"../deleteTicket/DeleteModal"
+import DeleteModal from "../deleteTicket/DeleteModal";
 
 const TicketTable = ({
+  allTickets,
   setAllTickets,
   setShowTickets,
   setAssignedTickets,
@@ -18,7 +19,7 @@ const TicketTable = ({
   showTickets,
   setIsLoading,
   setSuccess,
-  setErrMsg
+  setErrMsg,
 }) => {
   const { auth } = useAuth();
 
@@ -77,9 +78,9 @@ const TicketTable = ({
             <i style={{ color: "#ffc36d" }} className="bx bxs-edit"></i>
           </button>
           <EditModal
-         setSuccess={setSuccess}
-         setErrMsg={setErrMsg}
-          setIsLoading={setIsLoading}
+            setSuccess={setSuccess}
+            setErrMsg={setErrMsg}
+            setIsLoading={setIsLoading}
             setAllTickets={setAllTickets}
             setShowTickets={setShowTickets}
             setAssignedTickets={setAssignedTickets}
@@ -98,9 +99,9 @@ const TicketTable = ({
             <i style={{ color: "#ff5050" }} className="bx bx-trash"></i>
           </button>
           <DeleteModal
-         setSuccess={setSuccess}
-         setErrMsg={setErrMsg}
-          setIsLoading={setIsLoading}
+            setSuccess={setSuccess}
+            setErrMsg={setErrMsg}
+            setIsLoading={setIsLoading}
             setAllTickets={setAllTickets}
             setShowTickets={setShowTickets}
             setAssignedTickets={setAssignedTickets}
@@ -127,7 +128,14 @@ const TicketTable = ({
     },
     {
       name: "Status",
-      selector: (row) => row.status,
+      selector: (row) =>
+        row.status === "Complete" ? (
+          <span className="badge bg-success">{row.status}</span>
+        ) : row.status === "In Progress" ? (
+          <span className="badge bg-warning">{row.status}</span>
+        ) : (
+          <span className="badge bg-danger">{row.status}</span>
+        ),
       sortable: true,
     },
     {
@@ -147,23 +155,32 @@ const TicketTable = ({
     },
     {
       name: "Actions",
-      selector: (row) => (
-        <>
-          <label htmlFor="status" className="form-label"></label>
-          <select
-            id="ticket-select"
-            className="form-select d-inline-block"
-            aria-label="Default select Priority"
-            name="status"
-            data-testid="input"
-          >
-            <option defaultValue={row?.status}>{row?.status}</option>
-            <option value="Open">Open</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Complete">Complete</option>
-          </select>
-        </>
-      ),
+      selector: (row) =>
+        row.assignedTo === auth?.user?.empNumber ? (
+          <div className="" role="group" aria-label="Basic outlined example">
+            <button
+              type="button"
+              className="ms-3 ticket-btn btn btn-outline-secondary"
+              data-bs-toggle="modal"
+              data-bs-target={`#editTicket${row.id}`}
+            >
+              <i style={{ color: "#ffc36d" }} className="bx bxs-edit"></i>
+            </button>
+            <EditModal
+              setSuccess={setSuccess}
+              setErrMsg={setErrMsg}
+              setIsLoading={setIsLoading}
+              setAllTickets={setAllTickets}
+              setShowTickets={setShowTickets}
+              setAssignedTickets={setAssignedTickets}
+              setIncompleteTickets={setIncompleteTickets}
+              setOpenTickets={setOpenTickets}
+              users={users}
+              projects={projects}
+              ticket={row}
+            />
+          </div>
+        ) : null,
       sortable: true,
     },
   ];
@@ -177,14 +194,54 @@ const TicketTable = ({
     </pre>
   );
 
+  // filter tickets with search input
+  const filterTickets = (e) => {
+    let value = e.target.value;
+
+    if (value.length === 0) {
+      setShowTickets();
+      return setShowTickets(allTickets);
+    }
+    let filteredTitle = showTickets.filter((ticket) => {
+      return ticket.title.toLowerCase().includes(value.toLowerCase());
+    });
+
+    let filteredDesc = showTickets.filter((ticket) => {
+      return ticket.description.toLowerCase().includes(value.toLowerCase());
+    });
+
+    let results = [...filteredDesc, ...filteredTitle];
+    const unique = [...new Map(results.map((r) => [r.id, r])).values()];
+
+    setShowTickets(unique);
+  };
+
   return (
-    <DataTable
-      columns={auth?.user?.isAdmin ? adminColumns : userColumns}
-      data={showTickets}
-      expandableRows
-      expandableRowsComponent={ExpandedComponent}
-      pagination
-    />
+    <>
+      <div>
+        <div className="col-12">
+          <div className="d-flex justify-content-end">
+            <div style={{ width: "50%" }}>
+              <label></label>
+              <input
+                id="ticket-search"
+                type="search"
+                className="form-control mb-2 form-control-sm"
+                placeholder="Search ticket by title or description"
+                onChange={filterTickets}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <DataTable
+        columns={auth?.user?.isAdmin ? adminColumns : userColumns}
+        data={showTickets}
+        expandableRows
+        expandableRowsComponent={ExpandedComponent}
+        pagination
+      />
+    </>
   );
 };
 

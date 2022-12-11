@@ -34,11 +34,6 @@ describe("create modal", () => {
     expect(close).toBeInTheDocument();
     expect(close).toHaveClass("btn-close");
   });
-  test("should render inputs", () => {
-    render(<EditModal />, { wrapper: BrowserRouter });
-    const inputs = screen.getAllByTestId("input");
-    expect(inputs.length).toBe(5);
-  });
   test("should render cancel button", () => {
     render(<EditModal />, { wrapper: BrowserRouter });
     const cancel = screen.getByTestId("cancel-btn");

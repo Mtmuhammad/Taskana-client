@@ -250,8 +250,9 @@ const Tickets = () => {
                       {isLoading && <Spinner />}
 
                       {/* ticket table */}
-                      {showTickets ? (
+                      {showTickets && (
                         <TicketTable
+                        allTickets={allTickets}
                         setSuccess={setSuccess}
                         setErrMsg={setErrMsg}
                           users={users}
@@ -265,7 +266,7 @@ const Tickets = () => {
                           setIsLoading={setIsLoading}
 
                         />
-                      ) : null}
+                      ) }
                     </div>
                   </div>
                 </div>

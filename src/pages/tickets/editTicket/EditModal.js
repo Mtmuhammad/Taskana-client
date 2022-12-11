@@ -127,7 +127,7 @@ const EditModal = ({
             ></button>
           </div>
           <div className="modal-body">
-            <div className="mb-3">
+            { auth?.user?.isAdmin && <><div className="mb-3">
               <label htmlFor="name" className="form-label">
                 Ticket Title
               </label>
@@ -200,7 +200,7 @@ const EditModal = ({
                     <option key={project?.id} value={project?.id}>{project?.name}</option>
                   ))}
               </select>
-            </div>
+            </div> </>}
             <div className="mb-3">
               <label htmlFor="editTicketStatus" className="form-label">
                 Ticket Status
