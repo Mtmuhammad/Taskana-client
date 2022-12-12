@@ -256,7 +256,14 @@ const Home = () => {
         <div className="container p-0">
           <div className="row">
             {projects && <ProjectTable projects={projects} />}
-            {users && <UserTable users={users} />}
+            {users && (
+              <UserTable
+                setErrMsg={setErrMsg}
+                setSuccess={setSuccess}
+                setUsers={setUsers}
+                users={users}
+              />
+            )}
           </div>
         </div>
 

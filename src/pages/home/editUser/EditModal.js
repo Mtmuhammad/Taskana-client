@@ -1,14 +1,61 @@
-// Modal to create a new uer
-import React from "react";
+// Modal to edit a user
 
-const CreateModal = ({ onChange, handleCreate }) => {
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import "../../projects/projectCard/ProjectCard.scss";
+import { React, useState } from "react";
+
+const EditModal = ({ setUsers, user, setSuccess, setErrMsg }) => {
+  const axiosPrivate = useAxiosPrivate();
+  const [values, setValues] = useState({});
+
+  // set input values in state
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  // handle form submission to edit user
+  const handleEdit = async (e) => {
+    let isMounted = true;
+    const controller = new AbortController();
+    e.preventDefault();
+    let formData = { ...values };
+    if (formData.isAdmin) formData.isAdmin = formData.isAdmin === true;
+
+    try {
+      await axiosPrivate.patch(
+        `/users/${user?.empNumber}`,
+
+        JSON.stringify(formData),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+      const result = await axiosPrivate.get(`/users`, {
+        signal: controller.signal,
+      });
+
+      setErrMsg("");
+      setSuccess("User Modified!");
+      isMounted && setUsers(result.data.users);
+    } catch (err) {
+      setErrMsg(err?.response?.data?.error?.message);
+    }
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  };
+
   return (
     <div
+      style={{ color: "black" }}
       className="modal fade"
-      id="createUser"
+      id={`editUser${user?.empNumber}`}
       tabIndex="-1"
       aria-hidden="true"
-      data-testid="create-modal"
+      data-testid="edit-modal"
     >
       <div className="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
         <div className="modal-content">
@@ -16,10 +63,10 @@ const CreateModal = ({ onChange, handleCreate }) => {
             <h5
               data-testid="header"
               className="modal-title  fw-bold"
-              id="createUserLabel"
+              id="editProjectLabel"
             >
               {" "}
-              Create User
+              Edit User
             </h5>
             <button
               type="button"
@@ -37,11 +84,12 @@ const CreateModal = ({ onChange, handleCreate }) => {
               <input
                 type="text"
                 className="form-control"
-                id="firstName"
+                id={`firstName${user?.empNumber}`}
                 name="firstName"
                 placeholder="What is the user's first name?"
                 onChange={onChange}
                 data-testid="input"
+                defaultValue={user?.firstName}
               />
             </div>
             <div className="mb-3">
@@ -51,11 +99,12 @@ const CreateModal = ({ onChange, handleCreate }) => {
               <input
                 type="text"
                 className="form-control"
-                id="lastName"
+                id={`lastName${user?.empNumber}`}
                 name="lastName"
                 placeholder="What is the user's last name?"
                 onChange={onChange}
                 data-testid="input"
+                defaultValue={user?.lastName}
               />
             </div>
 
@@ -67,28 +116,15 @@ const CreateModal = ({ onChange, handleCreate }) => {
                 autoComplete="off"
                 type="email"
                 className="form-control"
-                id="email"
+                id={`email${user?.empNumber}`}
                 placeholder="Add user email"
                 name="email"
                 onChange={onChange}
                 data-testid="input"
+                defaultValue={user?.email}
               ></input>
             </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">
-                Password
-              </label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                placeholder="Add user password"
-                name="password"
-                onChange={onChange}
-                data-testid="input"
-                autoComplete="off"
-              ></input>
-            </div>
+
             <div className="mb-3">
               <label htmlFor="empRole" className="form-label">
                 Employee Role
@@ -98,10 +134,9 @@ const CreateModal = ({ onChange, handleCreate }) => {
                 className="form-select"
                 id="empRole"
                 name="empRole"
+                defaultValue={user?.empRole}
               >
-                <option value="" defaultValue>
-                  Choose a role:
-                </option>
+                <option value="">Choose a role:</option>
                 <option value="UI/UX Designer">UI/UX Designer</option>
                 <option value="Quality Assurance">Quality Assurance</option>
                 <option value="Backend Developer">Backend Developer</option>
@@ -119,6 +154,7 @@ const CreateModal = ({ onChange, handleCreate }) => {
                 className="form-select"
                 id="isAdmin"
                 name="isAdmin"
+                defaultValue={user?.isAdmin}
               >
                 <option value="" defaultValue>
                   Choose a value:
@@ -138,13 +174,13 @@ const CreateModal = ({ onChange, handleCreate }) => {
               Cancel
             </button>
             <button
-              data-bs-dismiss="modal"
-              onClick={handleCreate}
+              onClick={handleEdit}
               type="button"
               className="fs-5 btn btn-success"
-              data-testid="create-btn"
+              data-bs-dismiss="modal"
+              data-testid="edit-btn"
             >
-              Create
+              Edit User
             </button>
           </div>
         </div>
@@ -153,4 +189,4 @@ const CreateModal = ({ onChange, handleCreate }) => {
   );
 };
 
-export default CreateModal;
+export default EditModal;

@@ -1,8 +1,9 @@
 // Table to display users form db
 import React from "react";
 import useAuth from "../../../hooks/useAuth";
+import EditModal from "../editUser/EditModal";
 
-const UserTable = ({ users }) => {
+const UserTable = ({ setSuccess, setErrMsg, setUsers, users }) => {
   const { auth } = useAuth();
   return (
     <div className="mb-5 col-12 col-lg-6 d-flex align-items-stretch">
@@ -16,9 +17,7 @@ const UserTable = ({ users }) => {
               <table className="table stylish-table v-middle mb-0 no-wrap">
                 <thead>
                   <tr>
-                    <th className="border-0 text-muted fw-normal">
-                      Full Name
-                    </th>
+                    <th className="border-0 text-muted fw-normal">Full Name</th>
                     <th className="border-0 text-muted fw-normal">Email</th>
                     <th className="border-0 text-muted fw-normal">Role</th>
                     {auth?.user?.isAdmin && (
@@ -50,17 +49,24 @@ const UserTable = ({ users }) => {
                             type="button"
                             className="text-warning btn btn-outline-secondary"
                             data-bs-toggle="modal"
-                            data-bs-target="#editUser"
+                            data-bs-target={`#editUser${user?.empNumber}`}
                           >
-                            <i class="bx bxs-edit"></i>
+                            <i className="bx bxs-edit"></i>
                           </button>
+                          <EditModal
+                            key={user?.empNumber}
+                            setSuccess={setSuccess}
+                            setErrMsg={setErrMsg}
+                            setUsers={setUsers}
+                            user={user}
+                          />
                           <button
                             type="button"
                             className="text-danger btn btn-outline-secondary"
                             data-bs-toggle="modal"
                             data-bs-target="#deleteUser"
                           >
-                            <i class="bx bx-trash"></i>
+                            <i className="bx bx-trash"></i>
                           </button>
                         </div>
                       </td>
