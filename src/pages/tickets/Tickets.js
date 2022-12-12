@@ -160,9 +160,7 @@ const Tickets = () => {
       setIncompleteTickets(
         tickets.filter((ticket) => ticket.status === "In Progress") || 0
       );
-      setOpenTickets(
-        tickets.filter((ticket) => ticket.status === "Open") || 0
-      );
+      setOpenTickets(tickets.filter((ticket) => ticket.status === "Open") || 0);
 
       setErrMsg("");
       setSuccess("Ticket Created!");
@@ -196,12 +194,10 @@ const Tickets = () => {
         <div className="tickets container">
           {auth?.user?.isAdmin && <CreateBtn name={"Ticket"} />}
           {/* error message */}
-          {errMsg ? <ErrorMsg errMsg={errMsg} setErrMsg={setErrMsg} /> : null}
+          {errMsg && <ErrorMsg errMsg={errMsg} setErrMsg={setErrMsg} />}
 
           {/* success message */}
-          {success ? (
-            <SuccessMsg success={success} setSuccess={setSuccess} />
-          ) : null}
+          {success && <SuccessMsg success={success} setSuccess={setSuccess} />}
 
           <div className="row">
             <div className="col-12">
@@ -252,9 +248,9 @@ const Tickets = () => {
                       {/* ticket table */}
                       {showTickets && (
                         <TicketTable
-                        allTickets={allTickets}
-                        setSuccess={setSuccess}
-                        setErrMsg={setErrMsg}
+                          allTickets={allTickets}
+                          setSuccess={setSuccess}
+                          setErrMsg={setErrMsg}
                           users={users}
                           projects={projects}
                           setAllTickets={setAllTickets}
@@ -264,9 +260,8 @@ const Tickets = () => {
                           setIncompleteTickets={setIncompleteTickets}
                           setOpenTickets={setOpenTickets}
                           setIsLoading={setIsLoading}
-
                         />
-                      ) }
+                      )}
                     </div>
                   </div>
                 </div>

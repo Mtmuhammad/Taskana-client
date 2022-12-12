@@ -10,17 +10,25 @@ import HomeBox from "../../components/homeBox/HomeBox";
 import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 import ProjectTable from "./projectTable/ProjectTable";
 import UserTable from "./userTable/UserTable";
+import CreateBtn from "../../components/createBtn/CreateBtn";
+import CreateModal from "./createUser/CreateModal";
+import ErrorMsg from "../../components/errorMsg/ErrorMsg";
+import SuccessMsg from "../../components/successMsg/SuccessMsg";
 
 const Home = () => {
   const { auth } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [users, setUsers] = useState();
   const [projects, setProjects] = useState();
   const [tasks, setTasks] = useState();
   const [tickets, setTickets] = useState();
   const [assignedTickets, setAssignedTickets] = useState();
-  const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [values, setValues] = useState({});
+  const [errMsg, setErrMsg] = useState("");
+  const [success, setSuccess] = useState(false);
 
   // get all projects
   useEffect(() => {
@@ -150,14 +158,72 @@ const Home = () => {
     };
   }, [axiosPrivate, location, navigate, auth?.user?.empNumber]);
 
+  // clear all inputs from Modal
+  const clearInputs = () => {
+    document.querySelectorAll("input").forEach((input) => {
+      input.value = "";
+    });
+    document.querySelector("#empRole").value = "";
+  };
+
+  // set input values in state
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  // handle creation of user account
+  const handleCreate = async (e) => {
+    let isMounted = true;
+    const controller = new AbortController();
+    e.preventDefault();
+    let formData = { ...values };
+    formData.isAdmin = formData.isAmin === true;
+    try {
+      await axiosPrivate.post(
+        "/users",
+
+        JSON.stringify(formData),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+
+      const res = await axiosPrivate.get("/users", {
+        signal: controller.signal,
+      });
+      clearInputs();
+      setErrMsg("");
+      setSuccess("User Created!");
+
+      setValues();
+      isMounted && setUsers(res.data.users);
+    } catch (err) {
+      setErrMsg(err?.response?.data?.error?.message);
+    }
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  };
+
   return (
     <>
       <Sidebar />
       <section className="pages">
         <Breadcrumb page="Dashboard" />
 
+        {/* create user btn */}
+        {auth?.user.isAdmin && <CreateBtn name={"User"} />}
+        {/* error message */}
+        {errMsg && <ErrorMsg errMsg={errMsg} setErrMsg={setErrMsg} />}
+
+        {/* success message */}
+        {success && <SuccessMsg success={success} setSuccess={setSuccess} />}
+
         {/* icon boxes */}
-        <div className="container">
+        <div className="p-0 container">
           <div className="row">
             <HomeBox
               bgColor="#00d09c90"
@@ -187,12 +253,14 @@ const Home = () => {
         </div>
         {/* end icon boxes */}
 
-        <div className="container">
+        <div className="container p-0">
           <div className="row">
             {projects && <ProjectTable projects={projects} />}
             {users && <UserTable users={users} />}
           </div>
         </div>
+
+        <CreateModal onChange={onChange} handleCreate={handleCreate} />
       </section>
     </>
   );

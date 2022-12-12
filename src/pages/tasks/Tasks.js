@@ -8,7 +8,7 @@ import TaskItem from "./taskItem/TaskItem";
 import FilterBtn from "../tasks/filterBtn/FilterBtn";
 import FilterInput from "../tasks/filterInput/FilterInput";
 import SuccessMsg from "../../components/successMsg/SuccessMsg";
-import ErrMsg from "../../components/errorMsg/ErrorMsg";
+import ErrorMsg from "../../components/errorMsg/ErrorMsg";
 import CreateBtn from "../../components/createBtn/CreateBtn";
 import CreateModal from "../tasks/createTask/CreateModal";
 import "./taskItem/TaskItem.scss";
@@ -189,7 +189,7 @@ const Tasks = () => {
         <CreateBtn name={"Task"} />
 
         {/* error message */}
-        {errMsg ? <ErrMsg errorMsg={errMsg} setErrMsg={setErrMsg} /> : null}
+        {errMsg && <ErrorMsg errMsg={errMsg} setErrMsg={setErrMsg} />}
 
         {/* success message */}
         {success && <SuccessMsg success={success} setSuccess={setSuccess} />}

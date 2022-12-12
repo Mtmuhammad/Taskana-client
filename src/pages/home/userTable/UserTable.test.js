@@ -32,6 +32,6 @@ describe("user-table", () => {
   test("should render table headers", () => {
     render(<UserTable />, { wrapper: BrowserRouter });
     const headers = screen.getAllByRole("columnheader");
-    expect(headers.length).toBe(4);
+    expect(headers.length).toBe(3);
   });
 });

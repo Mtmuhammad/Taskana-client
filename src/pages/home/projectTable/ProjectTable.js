@@ -3,7 +3,7 @@ import React from 'react'
 
 const ProjectTable = ({ projects }) => {
   return (
-    <div className="mb-5 col-lg-6 d-flex align-items-stretch">
+    <div className="mb-5 col-12 col-lg-6 d-flex align-items-stretch">
       <div data-testid="project-table" className="table-style card w-100">
         <div className="card-body">
           <div className="d-md-flex">

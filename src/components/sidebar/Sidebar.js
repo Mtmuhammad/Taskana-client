@@ -61,7 +61,7 @@ const Sidebar = ({ page }) => {
               className="search-box"
             >
               <i className="bx bx-search icon"></i>
-              <input type="text" placeholder="Search..." />
+              <input disabled type="text" placeholder="Search..." />
             </li>
 
             <ul className="p-0 menu-links">

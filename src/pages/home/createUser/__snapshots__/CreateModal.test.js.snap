@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`smoke and snapshot tests should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    aria-hidden="true"
+    class="modal fade"
+    data-testid="create-modal"
+    id="createUser"
+    tabindex="-1"
+  >
+    <div
+      class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable"
+    >
+      <div
+        class="modal-content"
+      >
+        <div
+          class="modal-header"
+        >
+          <h5
+            class="modal-title  fw-bold"
+            data-testid="header"
+            id="createUserLabel"
+          >
+             Create User
+          </h5>
+          <button
+            aria-label="Close"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            data-testid="close-btn"
+            type="button"
+          />
+        </div>
+        <div
+          class="modal-body"
+        >
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="firstName"
+            >
+              First Name
+            </label>
+            <input
+              class="form-control"
+              data-testid="input"
+              id="firstName"
+              name="firstName"
+              placeholder="What is the user's first name?"
+              type="text"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="lastName"
+            >
+              Last Name
+            </label>
+            <input
+              class="form-control"
+              data-testid="input"
+              id="lastName"
+              name="lastName"
+              placeholder="What is the user's last name?"
+              type="text"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="email"
+            >
+              E-mail
+            </label>
+            <input
+              autocomplete="off"
+              class="form-control"
+              data-testid="input"
+              id="email"
+              name="email"
+              placeholder="Add user email"
+              type="email"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="password"
+            >
+              Password
+            </label>
+            <input
+              autocomplete="off"
+              class="form-control"
+              data-testid="input"
+              id="password"
+              name="password"
+              placeholder="Add user password"
+              type="password"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="empRole"
+            >
+              Employee Role
+            </label>
+            <select
+              class="form-select"
+              id="empRole"
+              name="empRole"
+            >
+              <option
+                value=""
+              >
+                Choose a role:
+              </option>
+              <option
+                value="UI/UX Designer"
+              >
+                UI/UX Designer
+              </option>
+              <option
+                value="Quality Assurance"
+              >
+                Quality Assurance
+              </option>
+              <option
+                value="Backend Developer"
+              >
+                Backend Developer
+              </option>
+              <option
+                value="Web Designer"
+              >
+                Web Designer
+              </option>
+              <option
+                value="Mobile Developer"
+              >
+                Mobile Developer
+              </option>
+              <option
+                value="Software Engineer"
+              >
+                Software Engineer
+              </option>
+            </select>
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              class="form-label"
+              for="isAdmin"
+            >
+              Is this employee admin?
+            </label>
+            <select
+              class="form-select"
+              id="isAdmin"
+              name="isAdmin"
+            >
+              <option
+                value=""
+              >
+                Choose a value:
+              </option>
+              <option
+                value="true"
+              >
+                Yes
+              </option>
+              <option
+                value="false"
+              >
+                No
+              </option>
+            </select>
+          </div>
+        </div>
+        <div
+          class="modal-footer"
+        >
+          <button
+            class="fs-5 btn btn-secondary"
+            data-bs-dismiss="modal"
+            data-testid="cancel-btn"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="fs-5 btn btn-success"
+            data-bs-dismiss="modal"
+            data-testid="create-btn"
+            type="button"
+          >
+            Create
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
