@@ -2,6 +2,7 @@
 import React from "react";
 import useAuth from "../../../hooks/useAuth";
 import EditModal from "../editUser/EditModal";
+import DeleteModal from "../deleteUser/DeleteModal";
 
 const UserTable = ({ setSuccess, setErrMsg, setUsers, users }) => {
   const { auth } = useAuth();
@@ -64,10 +65,18 @@ const UserTable = ({ setSuccess, setErrMsg, setUsers, users }) => {
                             type="button"
                             className="text-danger btn btn-outline-secondary"
                             data-bs-toggle="modal"
-                            data-bs-target="#deleteUser"
+                            data-bs-target={`#deleteUser${user?.empNumber}`}
                           >
                             <i className="bx bx-trash"></i>
                           </button>
+                          <DeleteModal
+                            key={user?.empNumber}
+                            setSuccess={setSuccess}
+                            setErrMsg={setErrMsg}
+                            setUsers={setUsers}
+                            user={user}
+                            users={users}
+                          />
                         </div>
                       </td>
                     </tr>
