@@ -10,6 +10,7 @@ const useLogout = () => {
   const logout = async () => {
     setAuth({});
     try {
+      // eslint-disable-next-line
       const res = await axios("/auth/logout", {
         withCredentials: true,
       });
