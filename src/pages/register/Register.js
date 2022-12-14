@@ -13,6 +13,7 @@ const NAME_REGEX = /^(?=.*[A-Z])[a-zA-Z-" * "]{2,20}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%&]).{8,20}$/;
 
 // email REGEX
+// eslint-disable-next-line
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const REGISTER_URL = process.env.REACT_APP_REGISTER_URL;
 

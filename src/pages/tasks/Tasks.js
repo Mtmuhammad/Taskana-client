@@ -23,6 +23,7 @@ const Tasks = () => {
   const [userTasks, setUserTasks] = useState();
   const [importantTasks, setImportantTasks] = useState();
   const [completeTasks, setCompleteTasks] = useState();
+  // eslint-disable-next-line
   const [filteredTasks, setFilteredTasks] = useState();
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);

@@ -10,6 +10,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%&]).{8,20}$/;
 
 // email REGEX
+// eslint-disable-next-line
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 

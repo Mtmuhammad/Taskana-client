@@ -18,6 +18,7 @@ const EditModal = ({
   const location = useLocation();
 
   const [values, setValues] = useState({});
+  // eslint-disable-next-line
   const [currProject, setCurrProject] = useState(info);
 
   // get single project info
