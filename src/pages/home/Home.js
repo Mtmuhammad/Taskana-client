@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Sidebar from "../../components/sidebar/Sidebar";
 import "./Home.scss";
-import HomeBox from "../../components/homeBox/HomeBox";
+import HomeBox from "./homeBox/HomeBox";
 import Breadcrumb from "../../components/breadcrumb/Breadcrumb";
 import ProjectTable from "./projectTable/ProjectTable";
 import UserTable from "./userTable/UserTable";

@@ -162,7 +162,7 @@ const TaskItem = ({
                 <div data-testid="task-btn-group" className="mt-3">
                   <button
                     type="button"
-                    className="task-btn btn btn-warning text-light me-3"
+                    className="mb-3 task-btn btn btn-warning text-light me-3"
                     data-bs-toggle="modal"
                     data-bs-target={`#editTask${task?.id}`}
                   >
@@ -172,7 +172,7 @@ const TaskItem = ({
                     type="button"
                     data-bs-toggle="modal"
                     data-bs-target={`#deleteTask${task?.id}`}
-                    className="task-btn btn btn-danger"
+                    className="mb-3 task-btn btn btn-danger"
                   >
                     Delete
                   </button>

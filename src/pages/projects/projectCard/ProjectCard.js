@@ -65,7 +65,14 @@ const ProjectCard = ({
       isMounted = false;
       controller.abort();
     };
-  }, [closedTickets?.length, project?.id, axiosPrivate, location, navigate]);
+  }, [
+    info?.id,
+    closedTickets?.length,
+    project?.id,
+    axiosPrivate,
+    location,
+    navigate,
+  ]);
 
   return (
     <div className="col-lg-4 col-md-6">
@@ -198,6 +205,8 @@ const ProjectCard = ({
         setErrMsg={setErrMsg}
         setSuccess={setSuccess}
         project={project}
+        info={info}
+        setInfo={setInfo}
       />
     </div>
   );

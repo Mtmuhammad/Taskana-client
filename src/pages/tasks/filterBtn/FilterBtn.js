@@ -11,7 +11,7 @@ const FilterBtn = ({ onClick, title, icon, tasks }) => {
         className="task-filter"
       >
         <div data-testid="filter-icon" className="task-filter-icon">
-          <i className={icon}></i>
+          <i className={`d-none d-sm-block ${icon}`}></i>
         </div>
         <div className="d-flex align-items-center justify-content-between w-100">
           <h3 data-testid="filter-title" className="task-filter-title">

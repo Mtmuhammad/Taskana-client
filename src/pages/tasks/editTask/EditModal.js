@@ -27,7 +27,7 @@ const EditModal = ({
     const controller = new AbortController();
     e.preventDefault();
     let formData = { ...values };
-    formData.important = formData.important === "true";
+    if (formData.important) formData.important = formData.important === "true";
     try {
       await axiosPrivate.patch(
         `/tasks/${task?.id}`,
@@ -152,7 +152,7 @@ const EditModal = ({
               data-testid="edit-btn"
               onClick={handleEdit}
             >
-              Edit
+              Edit Task
             </button>
           </div>
         </div>

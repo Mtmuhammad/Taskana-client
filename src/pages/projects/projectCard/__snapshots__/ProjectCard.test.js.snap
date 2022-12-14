@@ -61,7 +61,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
                 class="ms-2"
                 data-testid="project-deadline"
               >
-                Deadline:  
+                Deadline: 07-22-22 
               </span>
             </div>
           </div>
@@ -281,7 +281,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
                       id="deadline"
                       name="deadline"
                       type="date"
-                      value=""
+                      value="22-07-22"
                     />
                   </div>
                 </div>

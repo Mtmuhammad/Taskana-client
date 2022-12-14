@@ -6,6 +6,8 @@ import { React, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const EditModal = ({
+  info,
+  setInfo,
   setProjects,
   project,
   setSuccess,
@@ -16,8 +18,7 @@ const EditModal = ({
   const location = useLocation();
 
   const [values, setValues] = useState({});
-  const [info, setInfo] = useState();
-  const [currProject, setCurrProject] = useState(project)
+  const [currProject, setCurrProject] = useState(info);
 
   // get single project info
   useEffect(() => {
@@ -30,7 +31,7 @@ const EditModal = ({
           signal: controller.signal,
         });
 
-        isMounted && setInfo(res.data.project);
+        isMounted && setCurrProject(res.data.project);
       } catch (err) {
         console.log(err);
         navigate("/login", { state: { from: location }, replace: true });
@@ -56,10 +57,10 @@ const EditModal = ({
     const controller = new AbortController();
     e.preventDefault();
     let formData = { ...values };
-  
+
     try {
       await axiosPrivate.patch(
-        `/projects/${currProject?.id}`,
+        `/projects/${info?.id}`,
 
         JSON.stringify(formData),
         {
@@ -68,12 +69,20 @@ const EditModal = ({
         }
       );
       const result = await axiosPrivate.get(`/projects`, {
-         signal: controller.signal,
-       });
-      
+        signal: controller.signal,
+      });
+
+      const projectRes = await axiosPrivate.get(`/projects/${info?.id}`, {
+        signal: controller.signal,
+      });
+
       setErrMsg("");
       setSuccess("Project Modified!");
+      setProjects();
       isMounted && setProjects(result.data.projects);
+      setInfo();
+      setInfo(projectRes.data.project);
+      setValues({});
     } catch (err) {
       setErrMsg(err?.response?.data?.error?.message);
     }
@@ -82,6 +91,13 @@ const EditModal = ({
       isMounted = false;
       controller.abort();
     };
+  };
+
+  // format date for input default value
+  const formatDate = (project) => {
+    const [month, day, year] = project?.deadline?.split("-");
+
+    return [year, month, day].join("-");
   };
 
   return (
@@ -95,7 +111,11 @@ const EditModal = ({
       <div className="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 data-testid="header" className="modal-title  fw-bold" id="editProjectLabel">
+            <h5
+              data-testid="header"
+              className="modal-title  fw-bold"
+              id="editProjectLabel"
+            >
               {" "}
               Edit Project
             </h5>
@@ -133,7 +153,7 @@ const EditModal = ({
                       type="date"
                       className="form-control"
                       id="deadline"
-                      defaultValue={project?.deadline}
+                      defaultValue={formatDate(project)}
                       name="deadline"
                       onChange={onChange}
                       data-testid="input"
@@ -171,7 +191,7 @@ const EditModal = ({
                 className="form-control"
                 id="description"
                 rows="5"
-                defaultValue={info?.description}
+                defaultValue={info && info?.description}
                 onChange={onChange}
                 name="description"
                 data-testid="input"

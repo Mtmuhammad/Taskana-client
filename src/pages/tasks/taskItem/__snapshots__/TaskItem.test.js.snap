@@ -60,7 +60,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
                 data-testid="task-btn-group"
               >
                 <button
-                  class="task-btn btn btn-warning text-light me-3"
+                  class="mb-3 task-btn btn btn-warning text-light me-3"
                   data-bs-target="#editTaskundefined"
                   data-bs-toggle="modal"
                   type="button"
@@ -68,7 +68,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
                   Edit
                 </button>
                 <button
-                  class="task-btn btn btn-danger"
+                  class="mb-3 task-btn btn btn-danger"
                   data-bs-target="#deleteTaskundefined"
                   data-bs-toggle="modal"
                   type="button"
@@ -204,7 +204,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
               data-testid="edit-btn"
               type="button"
             >
-              Edit
+              Edit Task
             </button>
           </div>
         </div>

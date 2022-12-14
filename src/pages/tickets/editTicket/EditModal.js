@@ -236,7 +236,7 @@ const EditModal = ({
               data-testid="edit-btn"
               onClick={handleEdit}
             >
-              Edit
+              Edit Ticket
             </button>
           </div>
         </div>

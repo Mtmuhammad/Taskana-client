@@ -1,12 +1,10 @@
 // Login page component
 
 import { React, useState, useEffect, useRef } from "react";
-import useAuth from "../../hooks/useAuth"
+import useAuth from "../../hooks/useAuth";
 import "../register/Register.scss";
 import axios from "../../http-common";
-import {Link, useNavigate, useLocation} from "react-router-dom"
-
-
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 // password REGEX (1 lowercase letter, 1 uppercase letter, 1 number and 1 special character)
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%&]).{8,20}$/;
@@ -15,12 +13,12 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%&]).{8,20}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const LOGIN_URL = process.env.REACT_APP_LOGIN_URL;
 
-const Login = ({isDark}) => {
-  const { setAuth, persist, setPersist} = useAuth();
+const Login = ({ isDark }) => {
+  const { setAuth, persist, setPersist } = useAuth();
 
-  const navigate = useNavigate()
-  const location = useLocation()
-  const from = location.state?.from?.pathname || "/"
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const emailRef = useRef();
 
   const [values, setValues] = useState({
@@ -32,7 +30,14 @@ const Login = ({isDark}) => {
   const [validPwd, setValidPwd] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
- 
+  const [dark, setIsDark] = useState();
+
+  // set logo mode
+  useEffect(() => {
+    localStorage.getItem("isDark") === "true"
+      ? setIsDark(true)
+      : setIsDark(false);
+  },[]);
 
   // set focus on first input
   useEffect(() => {
@@ -54,7 +59,6 @@ const Login = ({isDark}) => {
       ? setValidPwd(true)
       : setValidPwd(false);
   }, [values]);
-
 
   // set input values in state
   const onChange = (e) => {
@@ -81,12 +85,12 @@ const Login = ({isDark}) => {
       const accessToken = res?.data?.token;
       const user = res?.data?.user;
       const role = res?.data?.role;
-      
+
       setAuth({ role, user, accessToken });
       clearInputs();
       setErrMsg("");
-      
-      navigate(from, {replace: true})
+
+      navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response!");
@@ -98,14 +102,13 @@ const Login = ({isDark}) => {
 
   // set persist value
   useEffect(() => {
-    localStorage.setItem("persist", persist)
-  },[persist])
+    localStorage.setItem("persist", persist);
+  }, [persist]);
 
-
-  //toggle persist login 
+  //toggle persist login
   const togglePersist = () => {
-    setPersist(prev => !prev)
-  }
+    setPersist((prev) => !prev);
+  };
 
   return (
     <>
@@ -119,7 +122,15 @@ const Login = ({isDark}) => {
           className="register-link mt-3 navbar-brand d-flex align-items-center"
           href="/"
         >
-          <img className="register-logo" alt="logo" src={isDark === 'true' ? "./taskana-main-dark.svg" : "./taskana-main.svg" } />
+          <img
+            className="register-logo"
+            alt="logo"
+            src={
+              dark
+                ? "./taskana-main-dark.svg"
+                : "./taskana-main.svg"
+            }
+          />
         </a>
       </nav>
       <div className="container register d-flex align-items-center justify-content-center">
@@ -173,8 +184,6 @@ const Login = ({isDark}) => {
               data-testid="register-form"
               style={{ minWidth: "250px" }}
             >
-              
-
               {/* email */}
               <div className="form-input mb-3">
                 <label className="text-muted m-0" htmlFor="email">
@@ -241,21 +250,20 @@ const Login = ({isDark}) => {
                 )}
               </div>
 
-              
               <button
-                disabled={
-                  validEmail &&
-                  validPwd 
-                    ? false
-                    : true
-                }
+                disabled={validEmail && validPwd ? false : true}
                 type="submit"
                 className="btn btn-block w-100 my-5"
               >
-               Login
+                Login
               </button>
               <div className="text-center persistCheck">
-                <input type="checkbox" id="persist" onChange={togglePersist} checked={persist} />
+                <input
+                  type="checkbox"
+                  id="persist"
+                  onChange={togglePersist}
+                  checked={persist}
+                />
                 <label htmlFor="persist">Trust This Device</label>
               </div>
             </form>

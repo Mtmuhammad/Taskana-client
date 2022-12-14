@@ -40,45 +40,47 @@ const UserTable = ({ setSuccess, setErrMsg, setUsers, users }) => {
                         </span>
                       </td>
                       <td>{user?.empRole}</td>
-                      <td>
-                        <div
-                          className="btn-group"
-                          role="group"
-                          aria-label="Basic outlined example"
-                        >
-                          <button
-                            type="button"
-                            className="text-warning btn btn-outline-secondary"
-                            data-bs-toggle="modal"
-                            data-bs-target={`#editUser${user?.empNumber}`}
+                      {auth?.user?.isAdmin && (
+                        <td>
+                          <div
+                            className="btn-group"
+                            role="group"
+                            aria-label="Basic outlined example"
                           >
-                            <i className="bx bxs-edit"></i>
-                          </button>
-                          <EditModal
-                            key={user?.empNumber}
-                            setSuccess={setSuccess}
-                            setErrMsg={setErrMsg}
-                            setUsers={setUsers}
-                            user={user}
-                          />
-                          <button
-                            type="button"
-                            className="text-danger btn btn-outline-secondary"
-                            data-bs-toggle="modal"
-                            data-bs-target={`#deleteUser${user?.empNumber}`}
-                          >
-                            <i className="bx bx-trash"></i>
-                          </button>
-                          <DeleteModal
-                            key={user?.empNumber}
-                            setSuccess={setSuccess}
-                            setErrMsg={setErrMsg}
-                            setUsers={setUsers}
-                            user={user}
-                            users={users}
-                          />
-                        </div>
-                      </td>
+                            <button
+                              type="button"
+                              className="text-warning btn btn-outline-secondary"
+                              data-bs-toggle="modal"
+                              data-bs-target={`#editUser${user?.empNumber}`}
+                            >
+                              <i className="bx bxs-edit"></i>
+                            </button>
+                            <EditModal
+                              key={`${user?.empNumber}${user?.empNumber}`}
+                              setSuccess={setSuccess}
+                              setErrMsg={setErrMsg}
+                              setUsers={setUsers}
+                              user={user}
+                            />
+                            <button
+                              type="button"
+                              className="text-danger btn btn-outline-secondary"
+                              data-bs-toggle="modal"
+                              data-bs-target={`#deleteUser${user?.empNumber}`}
+                            >
+                              <i className="bx bx-trash"></i>
+                            </button>
+                            <DeleteModal
+                              key={user?.empNumber}
+                              setSuccess={setSuccess}
+                              setErrMsg={setErrMsg}
+                              setUsers={setUsers}
+                              user={user}
+                              users={users}
+                            />
+                          </div>
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>

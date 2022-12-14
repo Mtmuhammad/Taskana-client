@@ -221,7 +221,7 @@ const TicketTable = ({
       <div>
         <div className="col-12">
           <div className="d-flex justify-content-end">
-            <div style={{ width: "50%" }}>
+            <div className="ticketInput" style={{ width: "50%" }}>
               <label></label>
               <input
                 id="ticket-search"

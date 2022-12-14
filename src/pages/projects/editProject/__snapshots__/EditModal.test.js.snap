@@ -76,7 +76,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
                     id="deadline"
                     name="deadline"
                     type="date"
-                    value=""
+                    value="22-07-22"
                   />
                 </div>
               </div>

@@ -134,24 +134,6 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
               </span>
             </a>
           </li>
-          <li
-            class="nav-link"
-          >
-            <a
-              class="sidebar-links"
-              data-testid="sidebar-link"
-              href="/account"
-            >
-              <i
-                class="bx bx-folder-open icon"
-              />
-              <span
-                class="text nav-text"
-              >
-                Account
-              </span>
-            </a>
-          </li>
         </ul>
       </div>
       <div

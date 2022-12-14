@@ -90,7 +90,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
             data-testid="edit-btn"
             type="button"
           >
-            Edit
+            Edit Ticket
           </button>
         </div>
       </div>

@@ -10,6 +10,7 @@ exports[`smoke and snapshot tests should match snapshot 1`] = `
         class="d-flex justify-content-end"
       >
         <div
+          class="ticketInput"
           style="width: 50%;"
         >
           <label />

@@ -117,19 +117,6 @@ const Sidebar = ({ page }) => {
                   <span className="text nav-text">Tickets</span>
                 </NavLink>
               </li>
-
-              <li className="nav-link">
-                <NavLink
-                data-testid="sidebar-link"
-                  to="/account"
-                  className={({ isActive }) =>
-                    isActive ? "sidebar-links active" : "sidebar-links"
-                  }
-                >
-                  <i className="bx bx-folder-open icon"></i>
-                  <span className="text nav-text">Account</span>
-                </NavLink>
-              </li>
             </ul>
           </div>
 
