@@ -39,13 +39,14 @@ const Register = ({isDark}) => {
   const [validInput, setValidInput] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
-  const [dark, setIsDark] = useState();
+  const [dark, setDark] = useState();
 
   // set logo mode
   useEffect(() => {
-    localStorage.getItem("isDark") === "true"
-      ? setIsDark(true)
-      : setIsDark(false);
+    let item = localStorage.getItem("isDark")
+    item !== null && item === "true"
+      ? setDark(true)
+      : setDark(false);
   },[]);
 
   // set focus on first input
@@ -143,7 +144,7 @@ const Register = ({isDark}) => {
           className="register-link mt-3 navbar-brand d-flex align-items-center"
           href="/"
         >
-          <img className="register-logo" alt="logo" src={dark ? "./taskana-main-dark.svg" : "./taskana-main.svg" } />
+          <img className="register-logo" alt="logo" src={dark === true ? "./taskana-main-dark.svg" : "./taskana-main.svg" } />
         </a>
       </nav>
       <div className="container d-flex align-items-center justify-content-center">

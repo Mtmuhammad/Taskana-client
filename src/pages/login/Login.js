@@ -31,13 +31,14 @@ const Login = ({ isDark }) => {
   const [validPwd, setValidPwd] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
-  const [dark, setIsDark] = useState();
+  const [dark, setDark] = useState();
 
   // set logo mode
   useEffect(() => {
-    localStorage.getItem("isDark") === "true"
-      ? setIsDark(true)
-      : setIsDark(false);
+    let item = localStorage.getItem("isDark")
+    item !== null && item === "true"
+      ? setDark(true)
+      : setDark(false);
   },[]);
 
   // set focus on first input
@@ -127,7 +128,7 @@ const Login = ({ isDark }) => {
             className="register-logo"
             alt="logo"
             src={
-              dark
+              dark === true
                 ? "./taskana-main-dark.svg"
                 : "./taskana-main.svg"
             }

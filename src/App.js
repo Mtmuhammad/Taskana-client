@@ -14,7 +14,7 @@ import React from 'react'
 // set light or dark mode on body
 const dark = localStorage.getItem("isDark");
 const body = document.querySelector("body");
-dark === "false" ? body.classList.remove("dark") : body.classList.add("dark");
+dark === "false" || dark === null ? body.classList.remove("dark") : body.classList.add("dark");
 
 function App() {
   return (
