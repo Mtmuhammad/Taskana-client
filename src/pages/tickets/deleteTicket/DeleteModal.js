@@ -34,21 +34,7 @@ const DeleteModal = ({
         signal: controller.signal,
       });
 
-      let tickets = res.data.tickets.map(async (ticket) => {
-        let result = await axiosPrivate.get(`/projects/${ticket.projectId}`, {
-          signal: controller.signal,
-        });
-        let nameResult = await axiosPrivate.get(`/users/${ticket.assignedTo}`, {
-          signal: controller.signal,
-        });
-        ticket[
-          "assignedName"
-        ] = `${nameResult.data.user.firstName} ${nameResult.data.user.lastName}`;
-        ticket["projectName"] = result.data.project.name;
-        return ticket;
-      });
-
-      tickets = await Promise.all(tickets);
+      let tickets = res.data.tickets
 
       isMounted && setAllTickets(tickets);
       setShowTickets();
