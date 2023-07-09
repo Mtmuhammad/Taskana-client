@@ -216,24 +216,48 @@ const TicketTable = ({
     setShowTickets(unique);
   };
 
+  // filter tickets by project name with search input
+  const filterTicketByProject = (e) => {
+    let value = e.target.value;
+
+    if (value.length <= 0) {
+      setShowTickets();
+      return setShowTickets(allTickets);
+    } else {
+      let filteredProjects = showTickets.filter((ticket) => {
+        return ticket.projectName.toLowerCase().includes(value.toLowerCase());
+      });
+
+      let results = [...filteredProjects];
+
+      const unique = [...new Map(results.map((r) => [r.id, r])).values()];
+      return setShowTickets(unique);
+    }
+  };
+
   return (
     <>
-      <div>
-        <div className="col-12">
-          <div className="d-flex justify-content-end">
-            <div className="ticketInput" style={{ width: "50%" }}>
-              <label></label>
-              <input
-                id="ticket-search"
-                type="search"
-                className="form-control mb-2 form-control-sm"
-                placeholder="Search ticket by title or description"
-                onChange={filterTickets}
-              />
-            </div>
-          </div>
+      <div className="d-flex justify-content-between flex-lg-row flex-column">
+        <div className="ticketInput me-lg-2 w-100">
+          <label></label>
+          <input
+            type="search"
+            className="ticket-search form-control mb-2 form-control-sm"
+            placeholder="Search ticket by project name"
+            onChange={filterTicketByProject}
+          />
+        </div>
+        <div className="projectInput ms-lg-2 w-100">
+          <label></label>
+          <input
+            type="search"
+            className="ticket-search form-control mb-2 form-control-sm"
+            placeholder="Search ticket by title or description"
+            onChange={filterTickets}
+          />
         </div>
       </div>
+
       <DataTable
         columns={auth?.user?.isAdmin ? adminColumns : userColumns}
         data={showTickets}

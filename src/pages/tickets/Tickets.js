@@ -237,14 +237,14 @@ const Tickets = () => {
             </div>
           </div>
         </div>
-        {/* create task modal */}
+        {/* create tickets modal */}
         <CreateModal
           projects={projects}
           users={users}
           onChange={onChange}
           handleCreate={handleCreate}
         />
-        {/* end create task modal */}
+        {/* end create tickets modal */}
       </section>
     </>
   );
